@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harings Development — Web & App Oplossingen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0e0e12; --ink2: #17171f; --ink3: #1e1e28;
+  --paper: #f5f2ec; --paper2: #ede9e0;
+  --gold: #c8a96e; --gold2: #e2c99a;
+  --white: #faf9f6; --muted: #7a7870; --muted-light: #aaa89f;
+  --border-dark: rgba(255,255,255,0.08);
+  --border-light: rgba(14,14,18,0.12);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink); color: var(--white);
+  font-family: 'Epilogue', sans-serif; font-weight: 300;
+  line-height: 1.75; overflow-x: hidden; -webkit-font-smoothing: antialiased;
+}
+
+/* GRAIN */
+body::after {
+  content:''; position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:9997; opacity:.5;
+}
+
+/* NAV */
+nav { position:fixed; top:0; left:0; right:0; z-index:500; padding:2rem 5vw; display:flex; align-items:center; justify-content:space-between; transition:background .5s,border-bottom .5s; }
+nav.scrolled { background:rgba(14,14,18,0.92); backdrop-filter:blur(16px); border-bottom:1px solid var(--border-dark); }
+.nav-logo { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:var(--white); text-decoration:none; }
+.nav-logo em { color:var(--gold); font-style:italic; }
+.nav-links { display:flex; gap:3rem; list-style:none; }
+.nav-links a { font-size:0.78rem; font-weight:400; color:rgba(250,249,246,0.45); text-decoration:none; letter-spacing:0.1em; text-transform:uppercase; transition:color .2s; }
+.nav-links a:hover { color:var(--white); }
+.nav-cta { font-size:0.78rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold); padding-bottom:2px; transition:opacity .2s; }
+.nav-cta:hover { opacity:.65; }
+.mobile-nav-btn { display:none; flex-direction:column; gap:5px; padding:4px; background:none; border:none; cursor:pointer; }
+.mobile-nav-btn span { display:block; width:22px; height:1px; background:var(--white); }
+
+/* HERO */
+#hero { min-height:100vh; display:grid; grid-template-rows:1fr auto; padding:16vh 5vw 7vh; position:relative; overflow:hidden; }
+.hero-rule  { position:absolute; top:0; right:18vw; bottom:0; width:1px; background:var(--border-dark); }
+.hero-rule2 { position:absolute; top:0; left:5vw;  bottom:0; width:1px; background:var(--border-dark); opacity:.4; }
+.hero-kicker { display:flex; align-items:center; gap:1.2rem; margin-bottom:2.5rem; opacity:0; animation:fadeUp .9s .1s ease forwards; }
+.hero-kicker-line { width:48px; height:1px; background:var(--gold); }
+.hero-kicker-text { font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:500; }
+h1 { font-family:'Playfair Display',serif; font-size:clamp(3rem,6.5vw,7.5rem); font-weight:900; line-height:0.95; letter-spacing:-0.025em; margin-bottom:2rem; opacity:0; animation:fadeUp .9s .25s ease forwards; }
+h1 .it { font-style:italic; color:var(--gold); }
+
+/* Typed tagline — fixed height prevents layout jumping */
+.tagline { height:2.4rem; display:flex; align-items:center; margin-bottom:2.5rem; opacity:0; animation:fadeUp .9s .38s ease forwards; }
+.typed-text { font-family:'Playfair Display',serif; font-style:italic; font-weight:700; font-size:clamp(1.1rem,1.8vw,1.5rem); color:var(--white); border-right:2px solid var(--gold); padding-right:4px; display:inline-block; min-width:2px; white-space:nowrap; animation:blink-cursor .9s step-end infinite; }
+@keyframes blink-cursor { 0%,100%{border-color:var(--gold)} 50%{border-color:transparent} }
+
+.hero-lower { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:end; opacity:0; animation:fadeUp .9s .52s ease forwards; }
+.hero-p { color:rgba(250,249,246,0.5); font-size:1.05rem; line-height:1.75; max-width:430px; }
+.hero-acts { display:flex; flex-direction:column; align-items:flex-start; gap:1.2rem; }
+
+.btn-primary { display:inline-flex; align-items:center; gap:1rem; padding:1.1rem 2.8rem; background:var(--gold); color:var(--ink); font-family:'Epilogue',sans-serif; font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; border:none; transition:background .25s,transform .25s; }
+.btn-primary:hover { background:var(--gold2); transform:translateX(4px); }
+.arr { transition:transform .25s; }
+.btn-primary:hover .arr { transform:translateX(4px); }
+.btn-ghost-text { font-size:0.82rem; letter-spacing:0.08em; color:rgba(250,249,246,0.38); text-decoration:none; text-transform:uppercase; font-weight:400; transition:color .2s; }
+.btn-ghost-text:hover { color:var(--white); }
+
+.hero-bottom { display:flex; align-items:center; gap:1.5rem; opacity:0; animation:fadeIn 1s 1s forwards; }
+.h-line  { width:70px; height:1px; background:var(--border-dark); }
+.h-label { font-size:0.65rem; letter-spacing:0.2em; color:rgba(250,249,246,0.2); text-transform:uppercase; }
+.h-dot   { width:6px; height:6px; border-radius:50%; background:var(--gold); opacity:.4; animation:breathe 2.5s ease-in-out infinite; }
+@keyframes breathe { 0%,100%{opacity:.3;transform:scale(1)} 50%{opacity:1;transform:scale(1.4)} }
+
+/* INTRO BAND */
+.intro-band { background:var(--paper); color:var(--ink); padding:6rem 5vw; display:grid; grid-template-columns:180px 1fr; gap:5vw; align-items:start; }
+.intro-band-label { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); font-weight:500; padding-top:.3rem; }
+.intro-band-text { font-family:'Playfair Display',serif; font-size:clamp(1.45rem,2.4vw,2.1rem); font-weight:700; line-height:1.45; letter-spacing:-0.01em; color:var(--ink); }
+.intro-band-text em { font-style:italic; color:var(--muted); }
+
+/* PROMISE BAND */
+.promise-band { background:var(--ink2); border-top:1px solid var(--border-dark); border-bottom:1px solid var(--border-dark); display:grid; grid-template-columns:repeat(3,1fr); }
+.promise-block { padding:3.5rem 3rem; border-right:1px solid var(--border-dark); transition:background .3s; position:relative; }
+.promise-block:last-child { border-right:none; }
+.promise-block:hover { background:var(--ink3); }
+.promise-block::before { content:''; position:absolute; top:0; left:3rem; right:3rem; height:2px; background:linear-gradient(90deg,var(--gold),transparent); transform:scaleX(0); transform-origin:left; transition:transform .4s ease; }
+.promise-block:hover::before { transform:scaleX(1); }
+.promise-label { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:500; margin-bottom:1.2rem; display:flex; align-items:center; gap:.6rem; }
+.promise-label::before { content:''; width:20px; height:1px; background:var(--gold); }
+.promise-title { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; line-height:1.2; margin-bottom:.9rem; }
+.promise-desc  { font-size:0.88rem; color:rgba(250,249,246,0.42); line-height:1.7; }
+
+/* JOURNEY */
+#journey { padding:9rem 5vw; background:var(--ink2); }
+.sec-hd { margin-bottom:6rem; }
+.sec-tag { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; }
+.sec-tag-line { width:36px; height:1px; background:var(--gold); }
+.sec-tag-text { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:500; }
+h2 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.8rem); font-weight:900; line-height:1.05; letter-spacing:-0.025em; }
+h2 .it { font-style:italic; }
+.sec-sub { color:rgba(250,249,246,0.42); font-size:1rem; max-width:460px; margin-top:1.5rem; line-height:1.75; }
+.journey-grid { display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--border-dark); }
+.j-phase { padding:3.5rem; border-right:1px solid var(--border-dark); border-bottom:1px solid var(--border-dark); position:relative; transition:background .3s; }
+.j-phase:nth-child(even) { border-right:none; }
+.j-phase:last-child { border-bottom:none; border-right:none; grid-column:1/-1; }
+.j-phase:nth-last-child(2) { border-bottom:none; }
+.j-num { font-family:'Playfair Display',serif; font-size:5rem; font-weight:900; color:rgba(200,169,110,0.07); line-height:1; position:absolute; top:2rem; right:2.5rem; transition:color .3s; }
+.j-phase:hover { background:var(--ink3); }
+.j-phase:hover .j-num { color:rgba(200,169,110,0.13); }
+.j-tag { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); font-weight:500; margin-bottom:1.2rem; display:flex; align-items:center; gap:.6rem; }
+.j-tag::before { content:''; width:20px; height:1px; background:var(--gold); }
+.j-title { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; margin-bottom:1rem; line-height:1.2; }
+.j-desc { color:rgba(250,249,246,0.48); font-size:0.92rem; line-height:1.75; }
+.j-list { margin-top:1.5rem; display:flex; flex-direction:column; gap:.45rem; }
+.j-item { font-size:0.82rem; color:rgba(250,249,246,0.32); display:flex; align-items:flex-start; gap:.75rem; }
+.j-item::before { content:'—'; color:var(--gold); flex-shrink:0; }
+.j-last-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:.4rem 3rem; }
+
+/* SUPPORT */
+#support { padding:9rem 5vw; background:var(--ink); display:grid; grid-template-columns:1fr 1fr; gap:8vw; align-items:start; }
+.sup-card { background:var(--ink3); border:1px solid var(--border-dark); padding:3rem; position:relative; overflow:hidden; }
+.sup-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--gold),transparent); }
+.sup-quote { font-family:'Playfair Display',serif; font-size:clamp(1.1rem,1.8vw,1.35rem); font-style:italic; line-height:1.65; color:var(--white); opacity:.85; margin-bottom:2rem; }
+.sup-author { display:flex; align-items:center; gap:1rem; font-size:0.75rem; color:rgba(250,249,246,0.35); letter-spacing:0.06em; }
+.sup-author-line { width:28px; height:1px; background:var(--gold); flex-shrink:0; }
+.sup-divider { width:100%; height:1px; background:var(--border-dark); margin:2.5rem 0; }
+.sup-pillars { display:flex; flex-direction:column; gap:1.4rem; }
+.sup-pillar-title { font-family:'Playfair Display',serif; font-weight:700; font-size:.95rem; margin-bottom:.3rem; color:var(--gold); }
+.sup-pillar-desc { font-size:0.85rem; color:rgba(250,249,246,0.38); line-height:1.6; }
+#support .sec-tag-line { background:var(--gold); }
+#support h2 { margin-bottom:1.5rem; }
+.sup-text { color:rgba(250,249,246,0.45); margin-bottom:2.5rem; line-height:1.75; }
+.tiers { display:flex; flex-direction:column; gap:.75rem; margin-bottom:3rem; }
+.tier { display:flex; align-items:flex-start; gap:1.5rem; padding:1.5rem; border:1px solid var(--border-dark); transition:border-color .25s,background .25s; }
+.tier:hover { border-color:rgba(200,169,110,0.3); background:var(--ink3); }
+.tier-name { font-family:'Playfair Display',serif; font-weight:700; font-size:.95rem; margin-bottom:.3rem; }
+.tier-desc { font-size:0.82rem; color:rgba(250,249,246,0.38); line-height:1.6; }
+.tier-badge { padding:.25rem .8rem; border:1px solid rgba(200,169,110,0.3); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); white-space:nowrap; flex-shrink:0; align-self:center; }
+
+/* ABOUT */
+#about { background:var(--paper); color:var(--ink); padding:9rem 5vw; }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:8vw; align-items:start; }
+.about-photo { position:relative; }
+.photo-frame { position:relative; aspect-ratio:3/4; background:var(--paper2); overflow:hidden; max-width:420px; }
+.photo-frame img { width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(15%); }
+.photo-caption { position:absolute; bottom:-1.5rem; right:-2rem; background:var(--ink); color:var(--white); padding:1.2rem 1.8rem; max-width:210px; }
+.caption-name { font-family:'Playfair Display',serif; font-weight:700; font-size:1rem; margin-bottom:.2rem; }
+.caption-role { font-size:0.7rem; color:rgba(250,249,246,0.4); letter-spacing:0.1em; text-transform:uppercase; }
+.year-tag { position:absolute; top:1.5rem; left:-1.5rem; writing-mode:vertical-rl; font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+.about-text-col { padding-top:2rem; }
+.about-text-col .sec-tag-line { background:var(--muted); }
+.about-text-col .sec-tag-text { color:var(--muted); }
+.about-text-col h2 { color:var(--ink); margin-bottom:2rem; }
+.about-intro { font-family:'Playfair Display',serif; font-size:1.15rem; font-style:italic; color:var(--muted); margin-bottom:2rem; line-height:1.65; }
+.about-p { color:var(--ink); opacity:.6; font-size:0.97rem; line-height:1.8; margin-bottom:1.4rem; }
+.about-vals { margin-top:3rem; display:flex; flex-direction:column; gap:.65rem; }
+.about-val { display:flex; align-items:flex-start; gap:1rem; font-size:0.9rem; color:var(--ink); opacity:.8; }
+.about-val-b { color:var(--muted); font-weight:700; flex-shrink:0; }
+
+/* TESTIMONIALS */
+#testimonials { padding:9rem 5vw; background:var(--paper); color:var(--ink); }
+#testimonials .sec-tag-line { background:var(--muted); }
+#testimonials .sec-tag-text { color:var(--muted); }
+#testimonials h2 { color:var(--ink); }
+#testimonials .sec-sub { color:var(--muted); }
+.t-placeholder { margin-top:5rem; border:1px solid var(--border-light); background:var(--paper2); }
+.t-ph-inner { padding:4rem 5rem; display:flex; flex-direction:column; align-items:flex-start; position:relative; }
+.t-ph-inner::before { content:'"'; font-family:'Playfair Display',serif; font-size:12rem; font-weight:900; color:rgba(14,14,18,0.05); line-height:.7; position:absolute; top:2rem; right:4rem; pointer-events:none; }
+.t-ph-text { font-family:'Playfair Display',serif; font-size:clamp(1.1rem,1.8vw,1.4rem); font-style:italic; line-height:1.65; color:var(--ink); opacity:.7; max-width:680px; }
+
+/* CTA */
+#cta { padding:10rem 5vw; background:var(--ink); text-align:center; position:relative; overflow:hidden; }
+.cta-bg { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:'Playfair Display',serif; font-size:30vw; font-weight:900; color:rgba(255,255,255,0.014); white-space:nowrap; pointer-events:none; line-height:1; letter-spacing:-0.04em; }
+#cta .sec-tag { justify-content:center; margin-bottom:2rem; position:relative; z-index:1; }
+#cta h2 { font-size:clamp(2.5rem,5vw,5.5rem); margin:0 auto 1.5rem; max-width:760px; position:relative; z-index:1; }
+#cta p  { color:rgba(250,249,246,0.42); max-width:480px; margin:0 auto 3.5rem; line-height:1.75; position:relative; z-index:1; }
+.cta-btns { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; position:relative; z-index:1; }
+.btn-outline { display:inline-flex; align-items:center; gap:.75rem; padding:1.1rem 2.8rem; border:1px solid rgba(250,249,246,0.18); color:var(--white); font-family:'Epilogue',sans-serif; font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; transition:border-color .25s,background .25s; }
+.btn-outline:hover { border-color:rgba(250,249,246,0.45); background:rgba(250,249,246,0.04); }
+
+/* FOOTER */
+footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--border-dark); }
+.footer-inner { display:grid; grid-template-columns:2fr 1fr 1fr; gap:5vw; padding-bottom:4rem; border-bottom:1px solid var(--border-dark); }
+.foot-brand-name { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; margin-bottom:1rem; }
+.foot-brand-name em { font-style:italic; color:var(--gold); }
+.foot-tagline { color:rgba(250,249,246,0.3); font-size:0.88rem; max-width:270px; line-height:1.7; }
+.foot-col h4 { font-size:0.66rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(250,249,246,0.28); font-weight:500; margin-bottom:1.5rem; }
+.foot-col ul { list-style:none; display:flex; flex-direction:column; gap:.8rem; }
+.foot-col ul li a { color:rgba(250,249,246,0.45); text-decoration:none; font-size:0.88rem; transition:color .2s; }
+.foot-col ul li a:hover { color:var(--white); }
+.foot-bottom { padding:2rem 0; display:flex; justify-content:space-between; align-items:center; font-size:0.72rem; color:rgba(250,249,246,0.2); }
+
+/* ANIMATIONS */
+.reveal { opacity:0; transform:translateY(26px); transition:opacity .8s ease,transform .8s ease; }
+.reveal.visible { opacity:1; transform:none; }
+.d1{transition-delay:.1s;} .d2{transition-delay:.2s;} .d3{transition-delay:.3s;}
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+/* RESPONSIVE */
+@media (max-width:1100px) {
+  .journey-grid { grid-template-columns:1fr; }
+  .j-phase { border-right:none; }
+  .j-phase:nth-last-child(2) { border-bottom:1px solid var(--border-dark); }
+  #support { grid-template-columns:1fr; gap:4rem; }
+  .about-grid { grid-template-columns:1fr; gap:5rem; }
+  .photo-caption { right:0; } .year-tag { display:none; }
+  .promise-band { grid-template-columns:1fr; }
+  .promise-block { border-right:none; border-bottom:1px solid var(--border-dark); }
+  .promise-block:last-child { border-bottom:none; }
+  .t-ph-inner { padding:2.5rem; }
+  .footer-inner { grid-template-columns:1fr 1fr; gap:3rem; }
+  .foot-brand { grid-column:1/-1; }
+  .intro-band { grid-template-columns:1fr; gap:1.5rem; }
+}
+@media (max-width:768px) {
+  nav { padding:1.5rem 5vw; }
+  .nav-links,.nav-cta { display:none; }
+  .mobile-nav-btn { display:flex; }
+  #hero { padding-top:13vh; }
+  .hero-rule,.hero-rule2 { display:none; }
+  h1 { font-size:clamp(2.8rem,10vw,4rem); }
+  .hero-lower { grid-template-columns:1fr; gap:2rem; }
+  .promise-band { grid-template-columns:1fr; }
+  .footer-inner { grid-template-columns:1fr; }
+  .foot-bottom { flex-direction:column; gap:.6rem; text-align:center; }
+  .photo-frame { max-width:100%; }
+}
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Harings<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="werkwijze.html">Werkwijze</a></li>
+    <li><a href="diensten.html">Diensten</a></li>
+    <li><a href="#about">Over mij</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Project starten</a>
+  <button class="mobile-nav-btn" id="mBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-rule"></div>
+  <div class="hero-rule2"></div>
+  <div>
+    <div class="hero-kicker">
+      <div class="hero-kicker-line"></div>
+      <span class="hero-kicker-text">Web &amp; App Development</span>
+    </div>
+    <h1>Van eerste idee tot<br><span class="it">werkend product.</span><br>En daarna.</h1>
+    <p class="tagline"><span class="typed-text"></span></p>
+    <div class="hero-lower">
+      <p class="hero-p">Harings Development begeleidt u door het volledige digitale traject — van strategie en design, door ontwikkeling en lancering, tot langdurige ondersteuning. Geen losse onderdelen, maar één coherent proces.</p>
+      <div class="hero-acts">
+        <a href="contact.html" class="btn-primary">Project bespreken <span class="arr">→</span></a>
+        <a href="#journey" class="btn-ghost-text">Bekijk hoe het werkt</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="h-line"></div>
+    <div class="h-dot"></div>
+    <span class="h-label">Scroll om meer te ontdekken</span>
+  </div>
+</section>
+
+<!-- INTRO BAND -->
+<div class="intro-band reveal">
+  <span class="intro-band-label">De aanpak</span>
+  <p class="intro-band-text">Veel bureaus leveren een product op en verdwijnen. Wij starten een samenwerking. Van het eerste gesprek tot doorlopende optimalisatie — u heeft één aanspreekpunt dat uw bedrijf <em>écht</em> begrijpt.</p>
+</div>
+
+<!-- PROMISE BAND -->
+<div class="promise-band">
+  <div class="promise-block reveal">
+    <div class="promise-label">Eén aanspreekpunt</div>
+    <div class="promise-title">U praat altijd met de persoon die het bouwt</div>
+    <p class="promise-desc">Geen accountmanagers, geen doorverwijzingen. Van het eerste gesprek tot de lancering bent u in direct contact met de developer die uw project realiseert.</p>
+  </div>
+  <div class="promise-block reveal d1">
+    <div class="promise-label">Volledige transparantie</div>
+    <div class="promise-title">U weet altijd waar uw project staat</div>
+    <p class="promise-desc">Wekelijkse updates, een gedeelde werkruimte en eerlijke communicatie over voortgang, keuzes en uitdagingen. Geen verrassingen aan het einde.</p>
+  </div>
+  <div class="promise-block reveal d2">
+    <div class="promise-label">Langdurige betrokkenheid</div>
+    <div class="promise-title">Na de lancering begint de samenwerking pas</div>
+    <p class="promise-desc">Ik lever niet op en verdwijn. Uw product blijft doorgroeien met doorlopend onderhoud, optimalisaties en een directe lijn voor alles wat er speelt.</p>
+  </div>
+</div>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="sec-hd reveal">
+    <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Het complete traject</span></div>
+    <h2>Van gesprek<br>tot <span class="it">live</span> product</h2>
+    <p class="sec-sub">Elk project doorloopt hetzelfde zorgvuldige proces. U weet altijd waar u staat, wat er komt en waarom we de keuzes maken die we maken.</p>
+  </div>
+  <div class="journey-grid reveal">
+    <div class="j-phase">
+      <div class="j-num">01</div>
+      <div class="j-tag">Fase één</div>
+      <div class="j-title">Strategie &amp; Ontdekking</div>
+      <p class="j-desc">We beginnen met luisteren. In een uitgebreid kennismakingsgesprek brengen we uw doelen, doelgroep en concurrentie scherp in kaart. Pas als we het grotere plaatje begrijpen, gaan we aan de slag.</p>
+      <div class="j-list">
+        <div class="j-item">Intake en doelstellingengesprek</div>
+        <div class="j-item">Markt- en concurrentieanalyse</div>
+        <div class="j-item">Projectplan en tijdlijn op maat</div>
+        <div class="j-item">Heldere offerte zonder verborgen kosten</div>
+      </div>
+    </div>
+    <div class="j-phase">
+      <div class="j-num">02</div>
+      <div class="j-tag">Fase twee</div>
+      <div class="j-title">Design &amp; Concept</div>
+      <p class="j-desc">We ontwerpen eerst, coderen daarna. U krijgt interactieve mockups te zien zodat het eindresultaat duidelijk is voordat er ook maar één regel code is geschreven. Meerdere revisierondes inbegrepen.</p>
+      <div class="j-list">
+        <div class="j-item">Wireframes en gebruikersflows</div>
+        <div class="j-item">High-fidelity UI design</div>
+        <div class="j-item">Interactief prototype ter beoordeling</div>
+        <div class="j-item">Volledig responsief ontwerp</div>
+      </div>
+    </div>
+    <div class="j-phase">
+      <div class="j-num">03</div>
+      <div class="j-tag">Fase drie</div>
+      <div class="j-title">Ontwikkeling</div>
+      <p class="j-desc">De bouw verloopt in korte, aantoonbare sprints. U heeft doorlopend inzicht in de voortgang via een privé-omgeving waar u het product al in werking kunt zien. Geen verrassingen aan het einde.</p>
+      <div class="j-list">
+        <div class="j-item">Front-end en back-end ontwikkeling</div>
+        <div class="j-item">Koppelingen met externe systemen en API's</div>
+        <div class="j-item">Grondige cross-browser en device tests</div>
+        <div class="j-item">Snelheid- en beveiligingsoptimalisatie</div>
+      </div>
+    </div>
+    <div class="j-phase">
+      <div class="j-num">04</div>
+      <div class="j-tag">Fase vier</div>
+      <div class="j-title">Lancering</div>
+      <p class="j-desc">De livegang is een gecontroleerd moment, geen sprong in het diepe. We zorgen voor een vlekkeloze overdracht, volledige documentatie en een rustige opstart zodat alles van dag één perfect functioneert.</p>
+      <div class="j-list">
+        <div class="j-item">Technische livegang-begeleiding</div>
+        <div class="j-item">Zoekmachineoptimalisatie op orde</div>
+        <div class="j-item">Overdracht van toegangen en documentatie</div>
+        <div class="j-item">Intensieve monitoring de eerste weken</div>
+      </div>
+    </div>
+    <div class="j-phase">
+      <div class="j-num">05</div>
+      <div class="j-tag">Fase vijf — doorlopend</div>
+      <div class="j-title">Ondersteuning &amp; Groei</div>
+      <p class="j-desc">De lancering is niet het einde, het is het begin. We blijven betrokken, meten wat werkt, lossen problemen op voordat u ze merkt en bouwen door op wat reeds staat. Uw digitale product wordt maand na maand beter.</p>
+      <div class="j-list j-last-list">
+        <div class="j-item">Proactief onderhoud en updates</div>
+        <div class="j-item">Maandelijkse prestatierapporten</div>
+        <div class="j-item">Nieuwe functies en iteraties</div>
+        <div class="j-item">Directe lijn voor vragen en fixes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section id="support">
+  <div class="sup-card reveal">
+    <p class="sup-quote">"Een product lanceren is pas het begin. Wat daarna komt — de kleine aanpassingen, de groeiende gebruikersbase, de vragen die je niet van tevoren kon bedenken — daar wil ik bij zijn."</p>
+    <div class="sup-author">
+      <div class="sup-author-line"></div>
+      <span>Noa Harings, oprichter Harings Development</span>
+    </div>
+    <div class="sup-divider"></div>
+    <div class="sup-pillars">
+      <div class="sup-pillar">
+        <div class="sup-pillar-title">Proactief</div>
+        <div class="sup-pillar-desc">Problemen worden opgelost voordat u ze merkt.</div>
+      </div>
+      <div class="sup-pillar">
+        <div class="sup-pillar-title">Transparant</div>
+        <div class="sup-pillar-desc">Maandelijkse rapportage over wat er speelt.</div>
+      </div>
+      <div class="sup-pillar">
+        <div class="sup-pillar-title">Beschikbaar</div>
+        <div class="sup-pillar-desc">Directe lijn, geen ticketsystemen.</div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal d1">
+    <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Na de lancering</span></div>
+    <h2>Altijd iemand<br>die <span class="it">meekijkt</span></h2>
+    <p class="sup-text">Na de lancering stopt het contact niet. Ik volg uw platform actief, los kleine dingen op voordat ze groot worden en rapporteer maandelijks over prestaties, gebruikersgedrag en mogelijkheden om verder te groeien.</p>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-info">
+          <div class="tier-name">Basis Ondersteuning</div>
+          <div class="tier-desc">Beveiligingsupdates, hosting en een maandelijkse technische check. Ideaal voor kleinere websites die stabiel moeten blijven draaien.</div>
+        </div>
+        <div class="tier-badge">Stabiel</div>
+      </div>
+      <div class="tier">
+        <div class="tier-info">
+          <div class="tier-name">Groei Ondersteuning</div>
+          <div class="tier-desc">Alles van Basis, aangevuld met performance-optimalisaties, analyserapportages en uitbreiding van functionaliteit op aanvraag.</div>
+        </div>
+        <div class="tier-badge">Populair</div>
+      </div>
+      <div class="tier">
+        <div class="tier-info">
+          <div class="tier-name">Prioriteit Ondersteuning</div>
+          <div class="tier-desc">Directe lijn, gegarandeerde respons binnen vier uur, continue monitoring en een vast aantal ontwikkeluren per maand inbegrepen.</div>
+        </div>
+        <div class="tier-badge">Volledig</div>
+      </div>
+    </div>
+    <a href="contact.html" class="btn-primary">Ondersteuning bespreken <span class="arr">→</span></a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-photo reveal">
+      <span class="year-tag">Harings Development</span>
+      <div class="photo-frame">
+        <img src="assets/Persoonlijke_Foto.jpeg" alt="Noa Harings — Harings Development">
+      </div>
+      <div class="photo-caption">
+        <div class="caption-name">Noa Harings</div>
+        <div class="caption-role">Oprichter &amp; Developer</div>
+      </div>
+    </div>
+    <div class="about-text-col reveal d1">
+      <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Over mij</span></div>
+      <h2>Techniek die<br>u <span class="it">begrijpt</span></h2>
+      <p class="about-intro">Ik ben Noa Harings, oprichter van Harings Development en de persoon die uw project van begin tot eind begeleidt.</p>
+      <p class="about-p">Al geruime tijd ben ik actief in web- en app development en heb ik ervaring met het ontwikkelen, lanceren en onderhouden van digitale producten — van veilige websites tot complete applicaties.</p>
+      <p class="about-p">In de afgelopen jaren heb ik gewerkt aan uiteenlopende projecten, waaronder apps die succesvol zijn uitgebracht en platforms waarbij veiligheid en stabiliteit centraal stonden. Ook heb ik als developer gewerkt met machine learning, waar ik technische diepgang en analytisch denken verder heb ontwikkeld.</p>
+      <p class="about-p">Toch haal ik de meeste voldoening niet uit complexe algoritmes, maar uit mensen helpen hun digitale ideeën werkelijkheid te maken. Ik geloof dat techniek pas écht waardevol is wanneer het begrijpelijk is, betrouwbaar werkt en bijdraagt aan de groei van iemand zijn bedrijf of visie.</p>
+      <p class="about-p">Daarom kies ik bewust voor een persoonlijke aanpak. Geen afstand, geen onnodige lagen — maar direct contact, duidelijke communicatie en een samenwerking die verder gaat dan alleen het opleveren van een product.</p>
+      <div class="about-vals">
+        <div class="about-val"><span class="about-val-b">—</span> Één aanspreekpunt, van begin tot eind</div>
+        <div class="about-val"><span class="about-val-b">—</span> Eerlijk over wat werkt en wat niet</div>
+        <div class="about-val"><span class="about-val-b">—</span> Technisch sterk, menselijk in communicatie</div>
+        <div class="about-val"><span class="about-val-b">—</span> Langdurige relaties boven snelle opdrachten</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-bg">HD</div>
+  <div class="sec-tag reveal" style="justify-content:center;">
+    <div class="sec-tag-line"></div>
+    <span class="sec-tag-text">Klaar voor de volgende stap?</span>
+    <div class="sec-tag-line"></div>
+  </div>
+  <h2 class="reveal">Laten we uw<br>project <span class="it">realiseren</span></h2>
+  <p class="reveal">Vertel me over uw idee of uitdaging. Ik neem binnen één werkdag contact op voor een vrijblijvend kennismakingsgesprek.</p>
+  <div class="cta-btns reveal">
+    <a href="contact.html" class="btn-primary">Stuur een bericht <span class="arr">→</span></a>
+    <a href="tel:+31640559828" class="btn-outline">+31 6 40 55 98 28</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="foot-brand">
+      <p class="foot-brand-name">Harings<em>.</em></p>
+      <p class="foot-tagline">Complete web- en app-oplossingen. Van de eerste schets tot de langdurige ondersteuning die uw product laat groeien.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Pagina's</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="werkwijze.html">Werkwijze</a></li>
+        <li><a href="diensten.html">Diensten</a></li>
+        <li><a href="#about">Over mij</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:contact@harings-development.nl">contact@harings-development.nl</a></li>
+        <li><a href="tel:+31640559828">+31 6 40 55 98 28</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 Harings Development. Alle rechten voorbehouden.</span>
+    <span>Nederland</span>
+  </div>
+</footer>
+
+<script>
+// NAVBAR SCROLL
+var nav = document.getElementById('navbar');
+window.addEventListener('scroll', function () {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// SCROLL REVEAL
+var obs = new IntersectionObserver(function (entries) {
+  entries.forEach(function (e) {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+
+// MOBILE NAV
+var mBtn = document.getElementById('mBtn');
+var navLinks = document.querySelector('.nav-links');
+var menuOpen = false;
+if (mBtn) {
+  mBtn.addEventListener('click', function () {
+    menuOpen = !menuOpen;
+    navLinks.style.cssText = menuOpen
+      ? 'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(14,14,18,0.97);backdrop-filter:blur(16px);padding:2rem 5vw;gap:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);'
+      : 'display:none;';
+  });
+  navLinks.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { menuOpen = false; navLinks.style.display = 'none'; });
+  });
+}
+
+// TYPING ANIMATION
+(function () {
+  var el = document.querySelector('.typed-text');
+  if (!el) return;
+  var phrases = ['volledig design','web development','app ontwikkeling','op maat gemaakt','snelle support'];
+  var pi = 0, ci = 0, deleting = false;
+  function tick() {
+    var cur = phrases[pi];
+    ci += deleting ? -1 : 1;
+    el.textContent = cur.substring(0, ci);
+    var wait = deleting ? 45 : 95;
+    if (!deleting && ci === cur.length)  { wait = 1800; deleting = true; }
+    else if (deleting && ci === 0)       { deleting = false; pi = (pi + 1) % phrases.length; wait = 400; }
+    setTimeout(tick, wait);
+  }
+  setTimeout(tick, 1200);
+})();
+</script>
+</body>
+</html>
