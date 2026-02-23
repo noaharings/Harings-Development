@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diensten — Harings Development</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ink:#0e0e12;--ink2:#17171f;--ink3:#1e1e28;--paper:#f5f2ec;--paper2:#ede9e0;--gold:#c8a96e;--gold2:#e2c99a;--white:#faf9f6;--muted:#7a7870;--muted-light:#aaa89f;--border-dark:rgba(255,255,255,0.08);--border-light:rgba(14,14,18,0.12);}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--white);font-family:'Epilogue',sans-serif;font-weight:300;line-height:1.75;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased;}
+#cursor{width:8px;height:8px;background:var(--gold);border-radius:50%;position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .25s,height .25s,transform .25s;}
+#cursor-ring{width:36px;height:36px;border:1px solid rgba(200,169,110,0.4);border-radius:50%;position:fixed;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);}
+@media(hover:none){#cursor,#cursor-ring{display:none;}body{cursor:auto;}a,button{cursor:pointer;}}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9997;opacity:.5;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:2rem 5vw;display:flex;align-items:center;justify-content:space-between;transition:background .5s,border-bottom .5s;}
+nav.scrolled{background:rgba(14,14,18,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-dark);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);text-decoration:none;}
+.nav-logo em{color:var(--gold);font-style:italic;}
+.nav-links{display:flex;gap:3rem;list-style:none;}
+.nav-links a{font-size:0.78rem;font-weight:400;color:rgba(250,249,246,0.45);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-cta{font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;transition:opacity .2s;}
+.nav-cta:hover{opacity:.65;}
+.mobile-nav-btn{display:none;flex-direction:column;gap:5px;padding:4px;cursor:none;background:none;border:none;}
+.mobile-nav-btn span{display:block;width:22px;height:1px;background:var(--white);}
+.page-hero{padding:18vh 5vw 8vh;position:relative;overflow:hidden;border-bottom:1px solid var(--border-dark);}
+.page-hero-rule{position:absolute;top:0;right:18vw;bottom:0;width:1px;background:var(--border-dark);}
+.page-kicker{display:flex;align-items:center;gap:1.2rem;margin-bottom:2.5rem;opacity:0;animation:fadeUp .9s .1s ease forwards;}
+.page-kicker-line{width:48px;height:1px;background:var(--gold);}
+.page-kicker-text{font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,7rem);font-weight:900;line-height:0.95;letter-spacing:-0.025em;max-width:800px;opacity:0;animation:fadeUp .9s .25s ease forwards;}
+h1 .it{font-style:italic;color:var(--gold);}
+.page-hero-sub{color:rgba(250,249,246,0.45);font-size:1.05rem;max-width:500px;margin-top:2.5rem;line-height:1.75;opacity:0;animation:fadeUp .9s .4s ease forwards;}
+h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:900;line-height:1.05;letter-spacing:-0.025em;}
+h2 .it{font-style:italic;}
+.sec-tag{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.sec-tag-line{width:36px;height:1px;background:var(--gold);}
+.sec-tag-text{font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+.btn-primary{display:inline-flex;align-items:center;gap:1rem;padding:1.1rem 2.8rem;background:var(--gold);color:var(--ink);font-family:'Epilogue',sans-serif;font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border:none;cursor:none;transition:background .25s,transform .25s;}
+.btn-primary:hover{background:var(--gold2);transform:translateX(4px);}
+.arr{transition:transform .25s;}
+.btn-primary:hover .arr{transform:translateX(4px);}
+.btn-outline{display:inline-flex;align-items:center;gap:.75rem;padding:1.1rem 2.8rem;border:1px solid rgba(250,249,246,0.18);color:var(--white);font-family:'Epilogue',sans-serif;font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;cursor:none;transition:border-color .25s,background .25s;}
+.btn-outline:hover{border-color:rgba(250,249,246,0.45);background:rgba(250,249,246,0.04);}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* SERVICES OVERVIEW */
+.services-intro{padding:7rem 5vw;background:var(--paper);color:var(--ink);display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:start;}
+.services-intro .sec-tag-line{background:var(--muted);}
+.services-intro .sec-tag-text{color:var(--muted);}
+.services-intro h2{color:var(--ink);margin-bottom:2rem;}
+.si-lead{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,1.8vw,1.35rem);font-style:italic;line-height:1.65;color:var(--ink);opacity:.7;margin-bottom:2rem;}
+.si-text{color:var(--ink);opacity:.6;font-size:0.97rem;line-height:1.8;}
+
+/* SERVICE BLOCKS */
+.service-blocks{padding:7rem 5vw;background:var(--ink2);}
+.service-blocks h2{margin-bottom:5rem;max-width:600px;}
+.service-block{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:start;padding:5rem 0;border-bottom:1px solid var(--border-dark);}
+.service-block:last-child{border-bottom:none;}
+.service-block:nth-child(even) .sb-visual{order:-1;}
+.sb-tag{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;}
+.sb-tag::before{content:'';width:20px;height:1px;background:var(--gold);}
+.sb-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:900;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.5rem;}
+.sb-title .it{font-style:italic;color:var(--gold);}
+.sb-text{color:rgba(250,249,246,0.48);font-size:0.95rem;line-height:1.8;margin-bottom:2rem;}
+.sb-includes{display:flex;flex-direction:column;gap:.5rem;margin-bottom:2.5rem;}
+.sb-include{font-size:0.85rem;color:rgba(250,249,246,0.35);display:flex;align-items:flex-start;gap:.75rem;}
+.sb-include::before{content:'—';color:var(--gold);flex-shrink:0;}
+.sb-visual{background:var(--ink3);border:1px solid var(--border-dark);padding:3rem;position:relative;overflow:hidden;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;}
+.sb-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+.sb-visual-num{font-family:'Playfair Display',serif;font-size:9rem;font-weight:900;color:rgba(200,169,110,0.07);line-height:1;position:absolute;top:1rem;right:2rem;}
+.sb-visual-label{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--white);position:relative;z-index:1;margin-bottom:.5rem;}
+.sb-visual-sub{font-size:0.82rem;color:rgba(250,249,246,0.35);position:relative;z-index:1;line-height:1.6;}
+
+/* PACKAGES */
+.packages{padding:7rem 5vw;background:var(--ink);}
+.packages h2{margin-bottom:1rem;max-width:600px;}
+.packages-intro{color:rgba(250,249,246,0.42);font-size:1rem;max-width:500px;margin-bottom:5rem;line-height:1.75;}
+.packages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border-dark);}
+.package{padding:3rem;border-right:1px solid var(--border-dark);position:relative;transition:background .3s;}
+.package:last-child{border-right:none;}
+.package.featured{background:var(--ink3);}
+.package.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));}
+.pkg-badge{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:1.5rem;}
+.pkg-name{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;margin-bottom:.5rem;}
+.pkg-tagline{color:rgba(250,249,246,0.4);font-size:0.88rem;margin-bottom:2rem;line-height:1.5;}
+.pkg-divider{width:100%;height:1px;background:var(--border-dark);margin-bottom:2rem;}
+.pkg-features{display:flex;flex-direction:column;gap:.65rem;margin-bottom:2.5rem;}
+.pkg-feature{font-size:0.85rem;color:rgba(250,249,246,0.45);display:flex;align-items:flex-start;gap:.75rem;}
+.pkg-feature::before{content:'—';color:var(--gold);flex-shrink:0;}
+.pkg-cta{display:inline-flex;align-items:center;gap:.75rem;font-size:0.8rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.35);padding-bottom:2px;transition:border-color .2s,opacity .2s;}
+.pkg-cta:hover{border-color:var(--gold);opacity:.75;}
+.package:hover{background:var(--ink3);}
+
+/* FAQ */
+.faq{padding:7rem 5vw;background:var(--paper);color:var(--ink);}
+.faq .sec-tag-line{background:var(--muted);}
+.faq .sec-tag-text{color:var(--muted);}
+.faq h2{color:var(--ink);margin-bottom:4rem;}
+.faq-list{display:flex;flex-direction:column;max-width:800px;}
+.faq-item{border-bottom:1px solid var(--border-light);}
+.faq-q{padding:1.75rem 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:2rem;}
+.faq-q-text{font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:var(--ink);}
+.faq-icon{width:24px;height:24px;flex-shrink:0;border:1px solid var(--border-light);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s,border-color .3s;}
+.faq-icon::before{content:'+';font-size:1rem;color:var(--gold);line-height:1;}
+.faq-item.open .faq-icon{transform:rotate(45deg);border-color:var(--gold);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:1.75rem;}
+.faq-a p{color:var(--ink);opacity:.6;font-size:0.95rem;line-height:1.8;}
+
+/* CTA BAND */
+.cta-band{padding:8rem 5vw;background:var(--ink);text-align:center;position:relative;overflow:hidden;}
+.cta-band-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:28vw;font-weight:900;color:rgba(255,255,255,0.013);white-space:nowrap;pointer-events:none;line-height:1;letter-spacing:-0.04em;}
+.cta-band h2{font-size:clamp(2.2rem,4.5vw,5rem);margin:0 auto 1.5rem;max-width:700px;position:relative;z-index:1;}
+.cta-band p{color:rgba(250,249,246,0.42);max-width:460px;margin:0 auto 3rem;line-height:1.75;position:relative;z-index:1;}
+.cta-band-actions{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--border-dark);}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr;gap:5vw;padding-bottom:4rem;border-bottom:1px solid var(--border-dark);}
+.foot-brand-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:1rem;}
+.foot-brand-name em{font-style:italic;color:var(--gold);}
+.foot-tagline{color:rgba(250,249,246,0.3);font-size:0.88rem;max-width:270px;line-height:1.7;}
+.foot-col h4{font-size:0.66rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(250,249,246,0.28);font-weight:500;margin-bottom:1.5rem;}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.8rem;}
+.foot-col ul li a{color:rgba(250,249,246,0.45);text-decoration:none;font-size:0.88rem;transition:color .2s;}
+.foot-col ul li a:hover{color:var(--white);}
+.foot-bottom{padding:2rem 0;display:flex;justify-content:space-between;align-items:center;font-size:0.72rem;color:rgba(250,249,246,0.2);}
+
+@media(max-width:1100px){
+  .services-intro{grid-template-columns:1fr;gap:3rem;}
+  .service-block{grid-template-columns:1fr;}
+  .service-block:nth-child(even) .sb-visual{order:0;}
+  .packages-grid{grid-template-columns:1fr;}
+  .package{border-right:none;border-bottom:1px solid var(--border-dark);}
+  .package:last-child{border-bottom:none;}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:3rem;}
+  .foot-brand{grid-column:1/-1;}
+}
+@media(max-width:768px){
+  nav{padding:1.5rem 5vw;}
+  .nav-links,.nav-cta{display:none;}
+  .mobile-nav-btn{display:flex;}
+  .page-hero{padding-top:14vh;}
+  h1{font-size:clamp(2.8rem,10vw,4rem);}
+  .footer-inner{grid-template-columns:1fr;}
+  .foot-bottom{flex-direction:column;gap:.6rem;text-align:center;}
+  #cursor,#cursor-ring{display:none;}
+  body{cursor:auto;}a,button{cursor:pointer;}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Harings<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="werkwijze.html">Werkwijze</a></li>
+    <li><a href="diensten.html" class="active">Diensten</a></li>
+    <li><a href="index.html#about">Over mij</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Project starten</a>
+  <button class="mobile-nav-btn" id="mBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-rule"></div>
+  <div class="page-kicker"><div class="page-kicker-line"></div><span class="page-kicker-text">Wat ik bouw</span></div>
+  <h1>Complete oplossingen,<br><span class="it">van begin tot eind.</span></h1>
+  <p class="page-hero-sub">Of u nu een website, een app of een volledig digitaal platform nodig heeft — ik lever het complete plaatje. Design, ontwikkeling, lancering en alles daarna.</p>
+</section>
+
+<!-- SERVICES INTRO -->
+<div class="services-intro reveal">
+  <div>
+    <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">De kern</span></div>
+    <h2 style="color:var(--ink)">Alles wat u<br>nodig heeft,<br><span class="it">onder één dak</span></h2>
+  </div>
+  <div>
+    <p class="si-lead">U hoeft niet met drie verschillende partijen te werken voor design, development en hosting. Bij Harings Development regelt één persoon het allemaal.</p>
+    <p class="si-text">Dat betekent geen miscommunicatie tussen een designbureau en een developer. Geen vertraging omdat iemand anders de server beheert. Geen excuses over wie waarvoor verantwoordelijk is. Eén aanspreekpunt, van het eerste idee tot het doorlopende onderhoud.</p>
+  </div>
+</div>
+
+<!-- SERVICE BLOCKS -->
+<section class="service-blocks">
+  <div class="reveal">
+    <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Diensten</span></div>
+    <h2>Wat ik voor u<br><span class="it">kan bouwen</span></h2>
+  </div>
+
+  <div class="service-block reveal">
+    <div class="sb-info">
+      <div class="sb-tag">Dienst 01</div>
+      <div class="sb-title">Websites &amp;<br><span class="it">Webapplicaties</span></div>
+      <p class="sb-text">Van een representatieve bedrijfswebsite tot een complexe webapplicatie met gebruikersaccounts, databases en koppelingen. Ik bouw wat u nodig heeft — niet meer, niet minder. Snel, veilig en vindbaar in zoekmachines.</p>
+      <div class="sb-includes">
+        <div class="sb-include">Volledig op maat ontworpen en gebouwd</div>
+        <div class="sb-include">Geoptimaliseerd voor Google (SEO)</div>
+        <div class="sb-include">Snel op elk apparaat en browser</div>
+        <div class="sb-include">CMS zodat u zelf content kunt beheren</div>
+        <div class="sb-include">Veilig en GDPR-conform</div>
+      </div>
+      <a href="contact.html" class="btn-primary">Website bespreken <span class="arr">→</span></a>
+    </div>
+    <div class="sb-visual">
+      <div class="sb-visual-num">01</div>
+      <div class="sb-visual-label">Web Development</div>
+      <div class="sb-visual-sub">Van eenvoudige presentatiesite tot volwaardige webapplicatie — alles gebouwd met het oog op snelheid, vindbaarheid en gebruiksgemak.</div>
+    </div>
+  </div>
+
+  <div class="service-block reveal">
+    <div class="sb-info">
+      <div class="sb-tag">Dienst 02</div>
+      <div class="sb-title">Mobiele Apps<br><span class="it">iOS &amp; Android</span></div>
+      <p class="sb-text">Eén app die werkt op zowel iPhone als Android, gebouwd met moderne cross-platform technologie. Ik bouw apps die aanvoelen als native — soepel, intuïtief en schaalbaar. Van idee tot verschijning in de App Store en Google Play.</p>
+      <div class="sb-includes">
+        <div class="sb-include">Eén codebase voor iOS en Android</div>
+        <div class="sb-include">Native uitstraling en performance</div>
+        <div class="sb-include">Publicatie in App Store en Google Play</div>
+        <div class="sb-include">Koppeling met bestaande systemen</div>
+        <div class="sb-include">Doorlopende updates en ondersteuning</div>
+      </div>
+      <a href="contact.html" class="btn-primary">App bespreken <span class="arr">→</span></a>
+    </div>
+    <div class="sb-visual">
+      <div class="sb-visual-num">02</div>
+      <div class="sb-visual-label">App Development</div>
+      <div class="sb-visual-sub">Native-achtige mobiele ervaring op elk platform, gebouwd voor echte gebruikers en klaar voor groei.</div>
+    </div>
+  </div>
+
+  <div class="service-block reveal">
+    <div class="sb-info">
+      <div class="sb-tag">Dienst 03</div>
+      <div class="sb-title">UI/UX Design &amp;<br><span class="it">Prototyping</span></div>
+      <p class="sb-text">Goed design is niet alleen mooi — het zorgt dat mensen intuïtief door uw product navigeren en doen wat u wilt dat ze doen. Ik ontwerp interfaces die zowel visueel sterk zijn als werkelijk bruikbaar. Altijd gebaseerd op de behoeften van uw gebruikers.</p>
+      <div class="sb-includes">
+        <div class="sb-include">Gebruikersonderzoek en flows</div>
+        <div class="sb-include">Wireframes en klikbaar prototype</div>
+        <div class="sb-include">Visueel systeem en stijlgids</div>
+        <div class="sb-include">Ontwerp klaar voor overdracht aan development</div>
+      </div>
+      <a href="contact.html" class="btn-primary">Design bespreken <span class="arr">→</span></a>
+    </div>
+    <div class="sb-visual">
+      <div class="sb-visual-num">03</div>
+      <div class="sb-visual-label">Design & UX</div>
+      <div class="sb-visual-sub">Interfaces die mensen begrijpen en gebruiken — want het mooiste product is waardeloos als niemand erdoorheen kan navigeren.</div>
+    </div>
+  </div>
+
+  <div class="service-block reveal">
+    <div class="sb-info">
+      <div class="sb-tag">Dienst 04</div>
+      <div class="sb-title">Onderhoud &amp;<br><span class="it">Doorontwikkeling</span></div>
+      <p class="sb-text">Na de lancering begint het eigenlijke werk. Ik houd uw digitale product draaiend, veilig en up-to-date. En als u wilt groeien, bouw ik nieuwe functies, analyseer ik het gebruik en adviseer ik over de volgende stap. Maandelijks, of zo intensief als u wilt.</p>
+      <div class="sb-includes">
+        <div class="sb-include">Beveiligingsupdates en technisch onderhoud</div>
+        <div class="sb-include">Maandelijkse prestatieanalyse</div>
+        <div class="sb-include">Nieuwe functies op aanvraag</div>
+        <div class="sb-include">Directe lijn voor vragen en fixes</div>
+        <div class="sb-include">Doorlopend advies over optimalisaties</div>
+      </div>
+      <a href="contact.html" class="btn-primary">Onderhoud bespreken <span class="arr">→</span></a>
+    </div>
+    <div class="sb-visual">
+      <div class="sb-visual-num">04</div>
+      <div class="sb-visual-label">Onderhoud & Groei</div>
+      <div class="sb-visual-sub">Uw product staat nooit stil. Ik zorg dat het meegroeit met uw bedrijf en altijd op z'n best presteert.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages">
+  <div class="reveal">
+    <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Ondersteuningspakketten</span></div>
+    <h2>Na de lancering:<br><span class="it">kies uw pakket</span></h2>
+    <p class="packages-intro">Na een project stapt u over naar een van de drie onderhoudsvormen. Zo weet u altijd wat u betaalt en wat u terugkrijgt.</p>
+  </div>
+  <div class="packages-grid reveal">
+    <div class="package">
+      <div class="pkg-badge">Basis</div>
+      <div class="pkg-name">Stabiel</div>
+      <div class="pkg-tagline">Voor websites die betrouwbaar moeten blijven draaien zonder grote doorontwikkeling.</div>
+      <div class="pkg-divider"></div>
+      <div class="pkg-features">
+        <div class="pkg-feature">Maandelijkse beveiligingsupdates</div>
+        <div class="pkg-feature">Technische hostingmonitoring</div>
+        <div class="pkg-feature">Maandelijkse technische check</div>
+        <div class="pkg-feature">E-mail support</div>
+      </div>
+      <a href="contact.html" class="pkg-cta">Meer informatie →</a>
+    </div>
+    <div class="package featured">
+      <div class="pkg-badge">Meest gekozen</div>
+      <div class="pkg-name">Groei</div>
+      <div class="pkg-tagline">Voor bedrijven die niet stilstaan — u wilt optimaliseren, analyseren en doorgroeien.</div>
+      <div class="pkg-divider"></div>
+      <div class="pkg-features">
+        <div class="pkg-feature">Alles uit Stabiel</div>
+        <div class="pkg-feature">Maandelijkse prestatierapporten</div>
+        <div class="pkg-feature">Performance-optimalisaties</div>
+        <div class="pkg-feature">Kleine aanpassingen inbegrepen</div>
+        <div class="pkg-feature">Telefoon- en e-mail support</div>
+      </div>
+      <a href="contact.html" class="pkg-cta">Meer informatie →</a>
+    </div>
+    <div class="package">
+      <div class="pkg-badge">Volledig</div>
+      <div class="pkg-name">Prioriteit</div>
+      <div class="pkg-tagline">Voor platforms waarbij stilstand geen optie is en doorontwikkeling continu doorgaat.</div>
+      <div class="pkg-divider"></div>
+      <div class="pkg-features">
+        <div class="pkg-feature">Alles uit Groei</div>
+        <div class="pkg-feature">Vaste ontwikkeluren per maand</div>
+        <div class="pkg-feature">Continue monitoring</div>
+        <div class="pkg-feature">Reactie binnen vier uur</div>
+        <div class="pkg-feature">Maandelijkse strategiesessie</div>
+      </div>
+      <a href="contact.html" class="pkg-cta">Meer informatie →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="reveal">
+    <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Veelgestelde vragen</span></div>
+    <h2 style="color:var(--ink)">Wat mensen<br><span class="it">vaak vragen</span></h2>
+  </div>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Wat kost een website of app?</span><div class="faq-icon"></div></div>
+      <div class="faq-a"><p>Dat hangt af van de omvang en complexiteit. Ik werk met vaste projectprijzen, zodat u vooraf weet wat het kost. Na ons eerste gesprek stuur ik u een helder voorstel met een vaste prijs. Geen uurtarieven die kunnen oplopen.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Hoe lang duurt een project?</span><div class="faq-icon"></div></div>
+      <div class="faq-a"><p>Een eenvoudige website duurt gemiddeld vier tot zes weken. Een complexere webapplicatie of app duurt acht tot twaalf weken. In het voorstel staat altijd een concrete planning. Ik hou me aan deadlines — en als er iets verandert, communiceer ik dat vroeg.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Kan ik mijn website zelf aanpassen na de lancering?</span><div class="faq-icon"></div></div>
+      <div class="faq-a"><p>Ja. Ik bouw websites met een gebruiksvriendelijk CMS (contentbeheersysteem) waarmee u teksten, afbeeldingen en pagina's zelf kunt aanpassen zonder technische kennis. Ik geef u een introductie en een handleiding.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Ik heb al een website. Kunnen jullie die verbeteren?</span><div class="faq-icon"></div></div>
+      <div class="faq-a"><p>Absoluut. Ik kijk graag naar wat u al heeft en adviseer eerlijk of een verbetering of een volledig nieuw project meer oplevert. Soms is een bestaande website met wat aanpassingen al sterk verbeterd. Soms is nieuw bouwen slimmer. Ik geef u dat advies zonder bijbedoelingen.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Wat als ik later wil overstappen naar een ander bureau?</span><div class="faq-icon"></div></div>
+      <div class="faq-a"><p>Dan kunt u dat doen. Alle code, accounts en domeinen staan op uw naam. U ontvangt volledige documentatie. Ik bouw geen afhankelijkheden in die u aan mij binden. Uw vrijheid is mijn uitgangspunt.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Werk je ook samen met andere bedrijven of bureaus?</span><div class="faq-icon"></div></div>
+      <div class="faq-a"><p>Ja. Ik werk graag samen met merkenbureaus, marketingteams of andere partijen die al betrokken zijn bij uw project. Ik pas me aan de samenwerking aan en zorg voor heldere communicatie met alle betrokkenen.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="cta-band-bg">HD</div>
+  <div class="sec-tag reveal" style="justify-content:center;"><div class="sec-tag-line"></div><span class="sec-tag-text">Klaar om te beginnen?</span><div class="sec-tag-line"></div></div>
+  <h2 class="reveal">Vertel me over<br>uw <span class="it">project</span></h2>
+  <p class="reveal">Plan een vrijblijvend gesprek. Ik luister, stel vragen en kom met een eerlijk advies — ook als dat betekent dat u beter af bent zonder mij.</p>
+  <div class="cta-band-actions reveal">
+    <a href="contact.html" class="btn-primary">Gesprek inplannen <span class="arr">→</span></a>
+    <a href="werkwijze.html" class="btn-outline">Hoe ik werk</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="foot-brand">
+      <p class="foot-brand-name">Harings<em>.</em></p>
+      <p class="foot-tagline">Complete web- en app-oplossingen. Van de eerste schets tot de langdurige ondersteuning die uw product laat groeien.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Pagina's</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="werkwijze.html">Werkwijze</a></li>
+        <li><a href="diensten.html">Diensten</a></li>
+        <li><a href="index.html#about">Over mij</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:contact@harings-development.nl">contact@harings-development.nl</a></li>
+        <li><a href="tel:+31640559828">+31 6 40 55 98 28</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 Harings Development. Alle rechten voorbehouden.</span>
+    <span>Nederland</span>
+  </div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+if(cur&&ring&&window.matchMedia('(hover:hover)').matches){
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+  (function raf(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(raf);})();
+  document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.transform='translate(-50%,-50%) scale(1.6)';});el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.transform='translate(-50%,-50%) scale(1)';});});
+}
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const mBtn=document.getElementById('mBtn'),navLinks=document.querySelector('.nav-links');
+let open=false;
+if(mBtn){mBtn.addEventListener('click',()=>{open=!open;navLinks.style.cssText=open?'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(14,14,18,0.97);backdrop-filter:blur(16px);padding:2rem 5vw;gap:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);':'display:none;';});navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{open=false;navLinks.style.display='none';}));}
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{const item=q.parentElement;const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open');});});
+</script>
+</body>
+</html>
