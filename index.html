@@ -2,7 +2,8 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e0e12">
 <title>Harings Development — Web & App Oplossingen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,9 +32,9 @@ body::after {
   pointer-events:none; z-index:9997; opacity:.5;
 }
 
-/* NAV */
-nav { position:fixed; top:0; left:0; right:0; z-index:500; padding:2rem 5vw; display:flex; align-items:center; justify-content:space-between; transition:background .5s,border-bottom .5s; }
-nav.scrolled { background:rgba(14,14,18,0.92); backdrop-filter:blur(16px); border-bottom:1px solid var(--border-dark); }
+/* NAV — FIX: overflow:visible so mobile dropdown isn't clipped */
+nav { position:fixed; top:0; left:0; right:0; z-index:500; padding:2rem 5vw; display:flex; align-items:center; justify-content:space-between; transition:background .5s,border-bottom .5s; overflow:visible; }
+nav.scrolled { background:rgba(14,14,18,0.92); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border-dark); }
 .nav-logo { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:var(--white); text-decoration:none; }
 .nav-logo em { color:var(--gold); font-style:italic; }
 .nav-links { display:flex; gap:3rem; list-style:none; }
@@ -41,8 +42,26 @@ nav.scrolled { background:rgba(14,14,18,0.92); backdrop-filter:blur(16px); borde
 .nav-links a:hover { color:var(--white); }
 .nav-cta { font-size:0.78rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold); padding-bottom:2px; transition:opacity .2s; }
 .nav-cta:hover { opacity:.65; }
-.mobile-nav-btn { display:none; flex-direction:column; gap:5px; padding:4px; background:none; border:none; cursor:pointer; }
-.mobile-nav-btn span { display:block; width:22px; height:1px; background:var(--white); }
+.mobile-nav-btn { display:none; flex-direction:column; gap:5px; padding:4px; background:none; border:none; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.mobile-nav-btn span { display:block; width:22px; height:1px; background:var(--white); transition:transform .3s, opacity .3s; }
+/* Mobile dropdown — FIX: position:fixed so it always appears below nav correctly */
+.mobile-nav-dropdown {
+  display:none;
+  flex-direction:column;
+  position:fixed;
+  top:72px;
+  left:0; right:0;
+  z-index:499;
+  background:rgba(14,14,18,0.97);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  padding:2rem 5vw;
+  gap:1.5rem;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.mobile-nav-dropdown.open { display:flex; }
+.mobile-nav-dropdown a { font-size:0.9rem; font-weight:400; color:rgba(250,249,246,0.7); text-decoration:none; letter-spacing:0.08em; text-transform:uppercase; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,0.05); }
+.mobile-nav-dropdown a:last-child { border-bottom:none; color:var(--gold); }
 
 /* HERO */
 #hero { min-height:100vh; display:grid; grid-template-rows:1fr auto; padding:16vh 5vw 7vh; position:relative; overflow:hidden; }
@@ -54,7 +73,6 @@ nav.scrolled { background:rgba(14,14,18,0.92); backdrop-filter:blur(16px); borde
 h1 { font-family:'Playfair Display',serif; font-size:clamp(3rem,6.5vw,7.5rem); font-weight:900; line-height:0.95; letter-spacing:-0.025em; margin-bottom:2rem; opacity:0; animation:fadeUp .9s .25s ease forwards; }
 h1 .it { font-style:italic; color:var(--gold); }
 
-/* Typed tagline — fixed height prevents layout jumping */
 .tagline { height:2.4rem; display:flex; align-items:center; margin-bottom:2.5rem; opacity:0; animation:fadeUp .9s .38s ease forwards; }
 .typed-text { font-family:'Playfair Display',serif; font-style:italic; font-weight:700; font-size:clamp(1.1rem,1.8vw,1.5rem); color:var(--white); border-right:2px solid var(--gold); padding-right:4px; display:inline-block; min-width:2px; white-space:nowrap; animation:blink-cursor .9s step-end infinite; }
 @keyframes blink-cursor { 0%,100%{border-color:var(--gold)} 50%{border-color:transparent} }
@@ -63,7 +81,7 @@ h1 .it { font-style:italic; color:var(--gold); }
 .hero-p { color:rgba(250,249,246,0.5); font-size:1.05rem; line-height:1.75; max-width:430px; }
 .hero-acts { display:flex; flex-direction:column; align-items:flex-start; gap:1.2rem; }
 
-.btn-primary { display:inline-flex; align-items:center; gap:1rem; padding:1.1rem 2.8rem; background:var(--gold); color:var(--ink); font-family:'Epilogue',sans-serif; font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; border:none; transition:background .25s,transform .25s; }
+.btn-primary { display:inline-flex; align-items:center; gap:1rem; padding:1.1rem 2.8rem; background:var(--gold); color:var(--ink); font-family:'Epilogue',sans-serif; font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; border:none; transition:background .25s,transform .25s; -webkit-tap-highlight-color:transparent; }
 .btn-primary:hover { background:var(--gold2); transform:translateX(4px); }
 .arr { transition:transform .25s; }
 .btn-primary:hover .arr { transform:translateX(4px); }
@@ -161,17 +179,6 @@ h2 .it { font-style:italic; }
 .about-val { display:flex; align-items:flex-start; gap:1rem; font-size:0.9rem; color:var(--ink); opacity:.8; }
 .about-val-b { color:var(--muted); font-weight:700; flex-shrink:0; }
 
-/* TESTIMONIALS */
-#testimonials { padding:9rem 5vw; background:var(--paper); color:var(--ink); }
-#testimonials .sec-tag-line { background:var(--muted); }
-#testimonials .sec-tag-text { color:var(--muted); }
-#testimonials h2 { color:var(--ink); }
-#testimonials .sec-sub { color:var(--muted); }
-.t-placeholder { margin-top:5rem; border:1px solid var(--border-light); background:var(--paper2); }
-.t-ph-inner { padding:4rem 5rem; display:flex; flex-direction:column; align-items:flex-start; position:relative; }
-.t-ph-inner::before { content:'"'; font-family:'Playfair Display',serif; font-size:12rem; font-weight:900; color:rgba(14,14,18,0.05); line-height:.7; position:absolute; top:2rem; right:4rem; pointer-events:none; }
-.t-ph-text { font-family:'Playfair Display',serif; font-size:clamp(1.1rem,1.8vw,1.4rem); font-style:italic; line-height:1.65; color:var(--ink); opacity:.7; max-width:680px; }
-
 /* CTA */
 #cta { padding:10rem 5vw; background:var(--ink); text-align:center; position:relative; overflow:hidden; }
 .cta-bg { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:'Playfair Display',serif; font-size:30vw; font-weight:900; color:rgba(255,255,255,0.014); white-space:nowrap; pointer-events:none; line-height:1; letter-spacing:-0.04em; }
@@ -212,23 +219,34 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
   .promise-band { grid-template-columns:1fr; }
   .promise-block { border-right:none; border-bottom:1px solid var(--border-dark); }
   .promise-block:last-child { border-bottom:none; }
-  .t-ph-inner { padding:2.5rem; }
   .footer-inner { grid-template-columns:1fr 1fr; gap:3rem; }
   .foot-brand { grid-column:1/-1; }
   .intro-band { grid-template-columns:1fr; gap:1.5rem; }
 }
 @media (max-width:768px) {
-  nav { padding:1.5rem 5vw; }
+  nav { padding:1.25rem 5vw; }
   .nav-links,.nav-cta { display:none; }
   .mobile-nav-btn { display:flex; }
-  #hero { padding-top:13vh; }
+  #hero { padding-top:13vh; padding-bottom:5vh; }
   .hero-rule,.hero-rule2 { display:none; }
   h1 { font-size:clamp(2.8rem,10vw,4rem); }
   .hero-lower { grid-template-columns:1fr; gap:2rem; }
+  .hero-p { font-size:0.95rem; }
   .promise-band { grid-template-columns:1fr; }
+  .promise-block { padding:2.5rem; }
+  #journey { padding:5rem 5vw; }
+  .j-phase { padding:2.5rem; }
+  #support { padding:5rem 5vw; }
+  .sup-card { padding:2rem; }
+  #about { padding:5rem 5vw; }
+  .photo-frame { max-width:100%; }
+  .photo-caption { position:relative; bottom:auto; right:auto; margin-top:1rem; max-width:100%; }
+  #cta { padding:6rem 5vw; }
+  .cta-btns { flex-direction:column; align-items:center; }
   .footer-inner { grid-template-columns:1fr; }
   .foot-bottom { flex-direction:column; gap:.6rem; text-align:center; }
-  .photo-frame { max-width:100%; }
+  /* Mobile: reduce grain overlay for performance */
+  body::after { display:none; }
 }
 </style>
 </head>
@@ -243,10 +261,19 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">Project starten</a>
-  <button class="mobile-nav-btn" id="mBtn" aria-label="Menu">
+  <button class="mobile-nav-btn" id="mBtn" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<!-- FIX: Separate dropdown element, not inside nav's overflow context -->
+<div class="mobile-nav-dropdown" id="mobileNav" role="navigation" aria-label="Mobiel menu">
+  <a href="werkwijze.html">Werkwijze</a>
+  <a href="diensten.html">Diensten</a>
+  <a href="#about" id="mobileAboutLink">Over mij</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html">Project starten →</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -431,7 +458,7 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
     <div class="about-photo reveal">
       <span class="year-tag">Harings Development</span>
       <div class="photo-frame">
-        <img src="assets/Persoonlijke_Foto.jpeg" alt="Noa Harings — Harings Development">
+        <img src="assets/Persoonlijke_Foto.jpeg" alt="Noa Harings — Harings Development" loading="lazy">
       </div>
       <div class="photo-caption">
         <div class="caption-name">Noa Harings</div>
@@ -455,8 +482,6 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
     </div>
   </div>
 </section>
-
-
 
 <!-- CTA -->
 <section id="cta">
@@ -520,19 +545,36 @@ var obs = new IntersectionObserver(function (entries) {
 }, { threshold: 0.07 });
 document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
 
-// MOBILE NAV
+// MOBILE NAV — FIX: use separate dropdown element with position:fixed
 var mBtn = document.getElementById('mBtn');
-var navLinks = document.querySelector('.nav-links');
+var mobileNav = document.getElementById('mobileNav');
 var menuOpen = false;
+
+function closeMenu() {
+  menuOpen = false;
+  mobileNav.classList.remove('open');
+  mBtn.setAttribute('aria-expanded', 'false');
+}
+
+function openMenu() {
+  menuOpen = true;
+  mobileNav.classList.add('open');
+  mBtn.setAttribute('aria-expanded', 'true');
+}
+
 if (mBtn) {
   mBtn.addEventListener('click', function () {
-    menuOpen = !menuOpen;
-    navLinks.style.cssText = menuOpen
-      ? 'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(14,14,18,0.97);backdrop-filter:blur(16px);padding:2rem 5vw;gap:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);'
-      : 'display:none;';
+    menuOpen ? closeMenu() : openMenu();
   });
-  navLinks.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () { menuOpen = false; navLinks.style.display = 'none'; });
+  // Close on any link click
+  mobileNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+  // Close on outside click
+  document.addEventListener('click', function (e) {
+    if (menuOpen && !mBtn.contains(e.target) && !mobileNav.contains(e.target)) {
+      closeMenu();
+    }
   });
 }
 
