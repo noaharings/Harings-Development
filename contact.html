@@ -2,7 +2,8 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e0e12">
 <title>Contact — Harings Development</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,13 +12,11 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{--ink:#0e0e12;--ink2:#17171f;--ink3:#1e1e28;--paper:#f5f2ec;--paper2:#ede9e0;--gold:#c8a96e;--gold2:#e2c99a;--white:#faf9f6;--muted:#7a7870;--muted-light:#aaa89f;--border-dark:rgba(255,255,255,0.08);--border-light:rgba(14,14,18,0.12);}
 html{scroll-behavior:smooth;}
-body{background:var(--ink);color:var(--white);font-family:'Epilogue',sans-serif;font-weight:300;line-height:1.75;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased;}
-#cursor{width:8px;height:8px;background:var(--gold);border-radius:50%;position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .25s,height .25s,transform .25s;}
-#cursor-ring{width:36px;height:36px;border:1px solid rgba(200,169,110,0.4);border-radius:50%;position:fixed;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);}
-@media(hover:none){#cursor,#cursor-ring{display:none;}body{cursor:auto;}a,button{cursor:pointer;}}
+body{background:var(--ink);color:var(--white);font-family:'Epilogue',sans-serif;font-weight:300;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9997;opacity:.5;}
-nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:2rem 5vw;display:flex;align-items:center;justify-content:space-between;transition:background .5s,border-bottom .5s;}
-nav.scrolled{background:rgba(14,14,18,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-dark);}
+/* NAV FIX: overflow:visible */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:2rem 5vw;display:flex;align-items:center;justify-content:space-between;transition:background .5s,border-bottom .5s;overflow:visible;}
+nav.scrolled{background:rgba(14,14,18,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-dark);}
 .nav-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);text-decoration:none;}
 .nav-logo em{color:var(--gold);font-style:italic;}
 .nav-links{display:flex;gap:3rem;list-style:none;}
@@ -25,8 +24,13 @@ nav.scrolled{background:rgba(14,14,18,0.92);backdrop-filter:blur(16px);border-bo
 .nav-links a:hover,.nav-links a.active{color:var(--white);}
 .nav-cta{font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;transition:opacity .2s;}
 .nav-cta:hover{opacity:.65;}
-.mobile-nav-btn{display:none;flex-direction:column;gap:5px;padding:4px;cursor:none;background:none;border:none;}
+.mobile-nav-btn{display:none;flex-direction:column;gap:5px;padding:4px;background:none;border:none;-webkit-tap-highlight-color:transparent;}
 .mobile-nav-btn span{display:block;width:22px;height:1px;background:var(--white);}
+/* FIX: Mobile dropdown as fixed-position sibling, not inside nav */
+.mobile-nav-dropdown{display:none;flex-direction:column;position:fixed;top:72px;left:0;right:0;z-index:499;background:rgba(14,14,18,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:2rem 5vw;gap:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);}
+.mobile-nav-dropdown.open{display:flex;}
+.mobile-nav-dropdown a{font-size:0.9rem;font-weight:400;color:rgba(250,249,246,0.7);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.mobile-nav-dropdown a:last-child{border-bottom:none;color:var(--gold);}
 h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:900;line-height:1.05;letter-spacing:-0.025em;}
 h2 .it{font-style:italic;}
 .sec-tag{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
@@ -66,10 +70,10 @@ input,textarea,select{width:100%;background:rgba(255,255,255,0.04);border:1px so
 input::placeholder,textarea::placeholder{color:rgba(250,249,246,0.2);}
 input:focus,textarea:focus,select:focus{border-color:rgba(200,169,110,0.5);background:rgba(255,255,255,0.06);}
 textarea{resize:vertical;min-height:130px;}
-select{cursor:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c8a96e' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.2rem center;padding-right:2.5rem;}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c8a96e' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.2rem center;padding-right:2.5rem;}
 select option{background:var(--ink2);color:var(--white);}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.submit-btn{width:100%;padding:1.2rem;background:var(--gold);color:var(--ink);font-family:'Epilogue',sans-serif;font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:none;transition:background .25s,transform .25s,opacity .25s;display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:.5rem;}
+.submit-btn{width:100%;padding:1.2rem;background:var(--gold);color:var(--ink);font-family:'Epilogue',sans-serif;font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;transition:background .25s,transform .25s,opacity .25s;display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:.5rem;-webkit-tap-highlight-color:transparent;}
 .submit-btn:hover:not(:disabled){background:var(--gold2);transform:translateY(-2px);}
 .submit-btn:disabled{opacity:.6;cursor:not-allowed;}
 .submit-btn .arr{transition:transform .25s;}
@@ -79,8 +83,6 @@ select option{background:var(--ink2);color:var(--white);}
 .form-success{display:none;padding:2rem;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.25);text-align:center;}
 .form-success-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:.5rem;color:var(--gold);}
 .form-success-text{font-size:0.9rem;color:rgba(250,249,246,0.5);line-height:1.7;}
-
-/* Spinner */
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(14,14,18,0.3);border-top-color:var(--ink);border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -121,22 +123,20 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
   .foot-brand{grid-column:1/-1;}
 }
 @media(max-width:768px){
-  nav{padding:1.5rem 5vw;}
+  nav{padding:1.25rem 5vw;}
   .nav-links,.nav-cta{display:none;}
   .mobile-nav-btn{display:flex;}
-  h1{font-size:clamp(2.8rem,10vw,4rem);}
+  h1{font-size:clamp(2.4rem,9vw,3.5rem);}
+  .ch-left{padding:14vh 5vw 4vh;}
+  .ch-right{padding:4vh 5vw 6vh;}
   .form-row{grid-template-columns:1fr;}
   .footer-inner{grid-template-columns:1fr;}
   .foot-bottom{flex-direction:column;gap:.6rem;text-align:center;}
-  #cursor,#cursor-ring{display:none;}
-  body{cursor:auto;}a,button{cursor:pointer;}
+  body::after{display:none;}
 }
 </style>
 </head>
 <body>
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-
 <nav id="navbar">
   <a href="index.html" class="nav-logo">Harings<em>.</em></a>
   <ul class="nav-links">
@@ -146,14 +146,21 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">Project starten</a>
-  <button class="mobile-nav-btn" id="mBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="mobile-nav-btn" id="mBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
+
+<!-- FIX: Separate dropdown, position:fixed -->
+<div class="mobile-nav-dropdown" id="mobileNav">
+  <a href="werkwijze.html">Werkwijze</a>
+  <a href="diensten.html">Diensten</a>
+  <a href="index.html#about">Over mij</a>
+  <a href="contact.html" style="color:var(--white);">Contact</a>
+  <a href="contact.html">Project starten →</a>
+</div>
 
 <!-- CONTACT HERO: split screen -->
 <section class="contact-hero">
   <div class="contact-hero-rule"></div>
-
-  <!-- LEFT: Info -->
   <div class="ch-left">
     <div>
       <div class="page-kicker"><div class="page-kicker-line"></div><span class="page-kicker-text">In gesprek</span></div>
@@ -185,7 +192,6 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
     </div>
   </div>
 
-  <!-- RIGHT: Form -->
   <div class="ch-right">
     <div class="form-wrap">
       <div class="form-heading">Stuur een bericht</div>
@@ -296,131 +302,53 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
 </footer>
 
 <script>
-// ─── Custom cursor ───────────────────────────────────────────────────────────
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-if (cur && ring && window.matchMedia('(hover:hover)').matches) {
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
-  });
-  (function raf() {
-    rx += (mx - rx) * .1; ry += (my - ry) * .1;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(raf);
-  })();
-  document.querySelectorAll('a,button').forEach(el => {
-    el.addEventListener('mouseenter', () => { cur.style.transform = 'translate(-50%,-50%) scale(2.5)'; ring.style.transform = 'translate(-50%,-50%) scale(1.6)'; });
-    el.addEventListener('mouseleave', () => { cur.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.transform = 'translate(-50%,-50%) scale(1)'; });
-  });
+// NAV SCROLL
+var nav = document.getElementById('navbar');
+window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive:true });
+
+// SCROLL REVEAL
+var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold:0.07 });
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+
+// MOBILE NAV — FIX
+var mBtn = document.getElementById('mBtn');
+var mobileNav = document.getElementById('mobileNav');
+var menuOpen = false;
+function closeMenu(){ menuOpen=false; mobileNav.classList.remove('open'); mBtn.setAttribute('aria-expanded','false'); }
+function openMenu(){ menuOpen=true; mobileNav.classList.add('open'); mBtn.setAttribute('aria-expanded','true'); }
+if(mBtn){
+  mBtn.addEventListener('click', function(){ menuOpen ? closeMenu() : openMenu(); });
+  mobileNav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+  document.addEventListener('click', function(e){ if(menuOpen && !mBtn.contains(e.target) && !mobileNav.contains(e.target)) closeMenu(); });
 }
 
-// ─── Navbar scroll ───────────────────────────────────────────────────────────
-const nav = document.getElementById('navbar');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
-
-// ─── Scroll reveal ───────────────────────────────────────────────────────────
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.07 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// ─── Mobile nav ──────────────────────────────────────────────────────────────
-const mBtn = document.getElementById('mBtn');
-const navLinks = document.querySelector('.nav-links');
-let open = false;
-if (mBtn) {
-  mBtn.addEventListener('click', () => {
-    open = !open;
-    navLinks.style.cssText = open
-      ? 'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(14,14,18,0.97);backdrop-filter:blur(16px);padding:2rem 5vw;gap:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);'
-      : 'display:none;';
-  });
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    open = false; navLinks.style.display = 'none';
-  }));
-}
-
-
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mnjboblp'; // ← hier aanpassen
-
-const form       = document.getElementById('contactForm');
-const submitBtn  = document.getElementById('submitBtn');
-const formError  = document.getElementById('formError');
+// FORM
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mnjboblp';
+const form = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
+const formError = document.getElementById('formError');
 const formSuccess = document.getElementById('formSuccess');
-
-function highlightError(fieldId) {
-  const el = document.getElementById(fieldId);
-  el.style.borderColor = 'rgba(255,80,80,0.6)';
-  el.addEventListener('input', () => el.style.borderColor = '', { once: true });
-}
-
-function showError(msg) {
-  formError.textContent = msg;
-  formError.style.display = 'block';
-}
-
-function hideError() {
-  formError.style.display = 'none';
-}
-
-form.addEventListener('submit', async function (e) {
-  e.preventDefault();
-  hideError();
-
-  const naam    = document.getElementById('naam').value.trim();
-  const email   = document.getElementById('email').value.trim();
-  const bericht = document.getElementById('bericht').value.trim();
-
-  // Client-side validatie
-  let hasError = false;
-  if (!naam)    { highlightError('naam');    hasError = true; }
-  if (!email)   { highlightError('email');   hasError = true; }
-  if (!bericht) { highlightError('bericht'); hasError = true; }
-  if (hasError) {
-    showError('Vul alle verplichte velden in voordat u verzendt.');
-    return;
-  }
-
-  // E-mailadres validatie
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    highlightError('email');
-    showError('Voer een geldig e-mailadres in.');
-    return;
-  }
-
-  // Knop in laadstatus zetten
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<span class="spinner"></span> Verzenden...';
-
-  try {
-    const res = await fetch(FORMSPREE_ENDPOINT, {
-      method:  'POST',
-      body:    new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    });
-
-    if (res.ok) {
-      // Succesvol verzonden
-      form.style.display = 'none';
-      formSuccess.style.display = 'block';
-    } else {
-      // Server-side fout van Formspree
-      const data = await res.json().catch(() => ({}));
-      const msg  = data?.errors?.map(err => err.message).join(', ')
-                   || 'Er ging iets mis bij het verzenden. Probeer het opnieuw.';
-      showError(msg);
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = 'Bericht versturen <span class="arr">→</span>';
-    }
-  } catch (err) {
-    // Netwerk- of verbindingsfout
-    showError('Geen verbinding. Controleer uw internet en probeer het opnieuw.');
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = 'Bericht versturen <span class="arr">→</span>';
-  }
+function highlightError(fieldId){ var el=document.getElementById(fieldId); el.style.borderColor='rgba(255,80,80,0.6)'; el.addEventListener('input',function(){ el.style.borderColor=''; },{once:true}); }
+function showError(msg){ formError.textContent=msg; formError.style.display='block'; }
+function hideError(){ formError.style.display='none'; }
+form.addEventListener('submit', async function(e){
+  e.preventDefault(); hideError();
+  var naam=document.getElementById('naam').value.trim();
+  var email=document.getElementById('email').value.trim();
+  var bericht=document.getElementById('bericht').value.trim();
+  var hasError=false;
+  if(!naam){highlightError('naam');hasError=true;}
+  if(!email){highlightError('email');hasError=true;}
+  if(!bericht){highlightError('bericht');hasError=true;}
+  if(hasError){showError('Vul alle verplichte velden in voordat u verzendt.');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){highlightError('email');showError('Voer een geldig e-mailadres in.');return;}
+  submitBtn.disabled=true;
+  submitBtn.innerHTML='<span class="spinner"></span> Verzenden...';
+  try{
+    var res=await fetch(FORMSPREE_ENDPOINT,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+    if(res.ok){form.style.display='none';formSuccess.style.display='block';}
+    else{var data=await res.json().catch(function(){return{};});var msg=data&&data.errors?data.errors.map(function(err){return err.message;}).join(', '):'Er ging iets mis bij het verzenden. Probeer het opnieuw.';showError(msg);submitBtn.disabled=false;submitBtn.innerHTML='Bericht versturen <span class="arr">→</span>';}
+  }catch(err){showError('Geen verbinding. Controleer uw internet en probeer het opnieuw.');submitBtn.disabled=false;submitBtn.innerHTML='Bericht versturen <span class="arr">→</span>';}
 });
 </script>
 </body>
