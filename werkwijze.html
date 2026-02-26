@@ -20,8 +20,6 @@
 html { scroll-behavior: smooth; }
 body { background:var(--ink); color:var(--white); font-family:'Epilogue',sans-serif; font-weight:300; line-height:1.75; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
 body::after { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events:none; z-index:9997; opacity:.5; }
-
-/* NAV FIX */
 nav { position:fixed; top:0; left:0; right:0; z-index:500; padding:2rem 5vw; display:flex; align-items:center; justify-content:space-between; transition:background .5s,border-bottom .5s; overflow:visible; }
 nav.scrolled { background:rgba(14,14,18,0.92); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border-dark); }
 .nav-logo { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:var(--white); text-decoration:none; }
@@ -33,13 +31,10 @@ nav.scrolled { background:rgba(14,14,18,0.92); backdrop-filter:blur(16px); -webk
 .nav-cta:hover { opacity:.65; }
 .mobile-nav-btn { display:none; flex-direction:column; gap:5px; padding:4px; background:none; border:none; -webkit-tap-highlight-color:transparent; }
 .mobile-nav-btn span { display:block; width:22px; height:1px; background:var(--white); }
-/* FIX: Mobile dropdown fixed-position */
 .mobile-nav-dropdown { display:none; flex-direction:column; position:fixed; top:72px; left:0; right:0; z-index:499; background:rgba(14,14,18,0.97); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); padding:2rem 5vw; gap:1.5rem; border-bottom:1px solid rgba(255,255,255,0.08); }
 .mobile-nav-dropdown.open { display:flex; }
 .mobile-nav-dropdown a { font-size:0.9rem; font-weight:400; color:rgba(250,249,246,0.7); text-decoration:none; letter-spacing:0.08em; text-transform:uppercase; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,0.05); }
 .mobile-nav-dropdown a:last-child { border-bottom:none; color:var(--gold); }
-
-/* PAGE HERO */
 .page-hero { padding:18vh 5vw 8vh; position:relative; overflow:hidden; border-bottom:1px solid var(--border-dark); }
 .page-hero-rule { position:absolute; top:0; right:18vw; bottom:0; width:1px; background:var(--border-dark); }
 .page-kicker { display:flex; align-items:center; gap:1.2rem; margin-bottom:2.5rem; opacity:0; animation:fadeUp .9s .1s ease forwards; }
@@ -48,11 +43,8 @@ nav.scrolled { background:rgba(14,14,18,0.92); backdrop-filter:blur(16px); -webk
 h1 { font-family:'Playfair Display',serif; font-size:clamp(3rem,6vw,7rem); font-weight:900; line-height:0.95; letter-spacing:-0.025em; max-width:800px; opacity:0; animation:fadeUp .9s .25s ease forwards; }
 h1 .it { font-style:italic; color:var(--gold); }
 .page-hero-sub { color:rgba(250,249,246,0.45); font-size:1.05rem; max-width:500px; margin-top:2.5rem; line-height:1.75; opacity:0; animation:fadeUp .9s .4s ease forwards; }
-
-/* SHARED */
 h2 { font-family:'Playfair Display',serif; font-size:clamp(2rem,3.5vw,3.2rem); font-weight:900; line-height:1.05; letter-spacing:-0.025em; }
 h2 .it { font-style:italic; }
-h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; line-height:1.2; }
 .sec-tag { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; }
 .sec-tag-line { width:36px; height:1px; background:var(--gold); }
 .sec-tag-text { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:500; }
@@ -65,7 +57,6 @@ h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; li
 .d1{transition-delay:.1s;} .d2{transition-delay:.2s;} .d3{transition-delay:.3s;}
 @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
 
-/* MANIFESTO */
 .manifesto { padding:7rem 5vw; background:var(--paper); color:var(--ink); display:grid; grid-template-columns:1fr 1fr; gap:8vw; align-items:start; }
 .manifesto .sec-tag-line { background:var(--muted); }
 .manifesto .sec-tag-text { color:var(--muted); }
@@ -76,7 +67,6 @@ h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; li
 .m-point-title { font-family:'Playfair Display',serif; font-weight:700; font-size:1.05rem; color:var(--ink); margin-bottom:.5rem; }
 .m-point-text { font-size:0.92rem; color:var(--ink); opacity:.6; line-height:1.7; }
 
-/* PRINCIPLES */
 .principles { padding:7rem 5vw; background:var(--ink2); }
 .principles h2 { margin-bottom:5rem; max-width:600px; }
 .principles-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--border-dark); }
@@ -89,7 +79,6 @@ h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; li
 .p-title { font-family:'Playfair Display',serif; font-weight:700; font-size:1.15rem; margin-bottom:.75rem; line-height:1.2; }
 .p-text { font-size:0.88rem; color:rgba(250,249,246,0.42); line-height:1.7; }
 
-/* DEEP PROCESS */
 .deep-process { padding:7rem 5vw; background:var(--ink); }
 .deep-process h2 { margin-bottom:1rem; max-width:500px; }
 .dp-intro { color:rgba(250,249,246,0.45); font-size:1rem; max-width:520px; margin-bottom:5rem; line-height:1.75; }
@@ -106,7 +95,6 @@ h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; li
 .dp-deliverables { display:flex; flex-wrap:wrap; gap:.5rem; }
 .dp-del { font-size:0.72rem; padding:.3rem .9rem; border:1px solid rgba(200,169,110,0.2); color:rgba(200,169,110,0.7); letter-spacing:0.06em; text-transform:uppercase; }
 
-/* WHY DIFFERENT */
 .why-diff { padding:7rem 5vw; background:var(--paper); color:var(--ink); }
 .why-diff .sec-tag-line { background:var(--muted); }
 .why-diff .sec-tag-text { color:var(--muted); }
@@ -121,7 +109,6 @@ h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; li
 .diff-us { color:var(--ink); font-size:0.88rem; line-height:1.7; font-weight:400; }
 .diff-title { font-family:'Playfair Display',serif; font-weight:700; font-size:1.15rem; color:var(--ink); }
 
-/* CTA BAND */
 .cta-band { padding:8rem 5vw; background:var(--ink); text-align:center; position:relative; overflow:hidden; }
 .cta-band-bg { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:'Playfair Display',serif; font-size:28vw; font-weight:900; color:rgba(255,255,255,0.013); white-space:nowrap; pointer-events:none; line-height:1; letter-spacing:-0.04em; }
 .cta-band h2 { font-size:clamp(2.2rem,4.5vw,5rem); margin:0 auto 1.5rem; max-width:700px; position:relative; z-index:1; }
@@ -129,8 +116,6 @@ h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; li
 .cta-band-actions { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; position:relative; z-index:1; }
 .btn-outline { display:inline-flex; align-items:center; gap:.75rem; padding:1.1rem 2.8rem; border:1px solid rgba(250,249,246,0.18); color:var(--white); font-family:'Epilogue',sans-serif; font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; transition:border-color .25s,background .25s; }
 .btn-outline:hover { border-color:rgba(250,249,246,0.45); background:rgba(250,249,246,0.04); }
-
-/* FOOTER */
 footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--border-dark); }
 .footer-inner { display:grid; grid-template-columns:2fr 1fr 1fr; gap:5vw; padding-bottom:4rem; border-bottom:1px solid var(--border-dark); }
 .foot-brand-name { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; margin-bottom:1rem; }
@@ -151,22 +136,181 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
   .footer-inner { grid-template-columns:1fr 1fr; gap:3rem; }
   .foot-brand { grid-column:1/-1; }
 }
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
 @media (max-width:768px) {
-  nav { padding:1.25rem 5vw; }
+  nav { padding:1.1rem 5vw; }
   .nav-links,.nav-cta { display:none; }
   .mobile-nav-btn { display:flex; }
-  .page-hero { padding-top:14vh; }
-  h1 { font-size:clamp(2.8rem,10vw,4rem); }
-  .principles-grid { grid-template-columns:1fr; }
-  .principle { border-right:none; }
-  .principle:nth-last-child(-n+3) { border-bottom:1px solid var(--border-dark); }
-  .principle:last-child { border-bottom:none; }
-  .dp-step { grid-template-columns:50px 1fr; gap:1.5rem; }
-  .diff-contrast { grid-template-columns:1fr; }
-  .cta-band-actions { flex-direction:column; align-items:center; }
-  .footer-inner { grid-template-columns:1fr; }
-  .foot-bottom { flex-direction:column; gap:.6rem; text-align:center; }
   body::after { display:none; }
+
+  /* HERO */
+  .page-hero { padding:11vh 5vw 3rem; }
+  .page-hero-rule { display:none; }
+  h1 { font-size:clamp(2.2rem,9vw,3.2rem); }
+  .page-kicker { margin-bottom:1.2rem; }
+  .page-hero-sub { font-size:0.88rem; margin-top:1.2rem; max-width:100%; }
+
+  /* MANIFESTO — compact single col */
+  .manifesto { padding:2.5rem 5vw; gap:2rem; }
+  .manifesto h2 { font-size:1.7rem; margin-bottom:1rem; }
+  .manifesto-text { font-size:1.05rem; margin-bottom:2rem; }
+  .manifesto-points { gap:1.2rem; }
+  .m-point { padding-left:1rem; }
+  .m-point-title { font-size:0.95rem; }
+  .m-point-text { font-size:0.85rem; }
+
+  /* PRINCIPLES — horizontal scroll */
+  .principles { padding:2.5rem 5vw; }
+  .principles h2 { font-size:1.7rem; margin-bottom:1.5rem; }
+  .principles-grid {
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    border:none;
+    gap:1rem;
+    scrollbar-width:none;
+  }
+  .principles-grid::-webkit-scrollbar { display:none; }
+  .principle {
+    min-width:72vw;
+    scroll-snap-align:start;
+    border:1px solid var(--border-dark) !important;
+    flex-shrink:0;
+    padding:2rem;
+  }
+  .principles-scroll-hint {
+    font-size:0.62rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:rgba(250,249,246,0.25);
+    margin-bottom:1rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .principles-scroll-hint::after { content:'→'; color:var(--gold); animation:nudge 1.5s ease-in-out infinite; }
+  @keyframes nudge { 0%,100%{transform:translateX(0)} 50%{transform:translateX(4px)} }
+
+  /* DEEP PROCESS — accordion */
+  .deep-process { padding:2.5rem 5vw; }
+  .deep-process h2 { font-size:1.7rem; margin-bottom:.75rem; }
+  .dp-intro { font-size:0.88rem; margin-bottom:2rem; }
+  .dp-steps::before { display:none; }
+  .dp-steps { gap:0; }
+  .dp-step {
+    display:block;
+    padding:0;
+    border-bottom:1px solid var(--border-dark);
+    cursor:pointer;
+  }
+  .dp-step:last-child { border-bottom:none; }
+  .dp-step-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:1.2rem 0;
+    gap:1rem;
+  }
+  .dp-step-header-left {
+    display:flex;
+    align-items:center;
+    gap:.75rem;
+  }
+  .dp-step-num-wrap {
+    display:none; /* hide in accordion mode */
+  }
+  .dp-num-sm {
+    width:32px; height:32px;
+    border:1px solid rgba(200,169,110,0.35);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display',serif;
+    font-weight:700; font-size:0.75rem;
+    color:var(--gold);
+    flex-shrink:0;
+  }
+  .dp-title-sm {
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:0.95rem;
+    color:var(--white);
+    line-height:1.2;
+  }
+  .dp-step-icon {
+    width:22px; height:22px;
+    border:1px solid var(--border-dark);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    transition:transform .3s, border-color .3s;
+  }
+  .dp-step-icon::before { content:'+'; font-size:.9rem; color:var(--gold); line-height:1; }
+  .dp-step.open .dp-step-icon { transform:rotate(45deg); border-color:var(--gold); }
+  .dp-step-body { max-height:0; overflow:hidden; transition:max-height .4s ease; }
+  .dp-step.open .dp-step-body { max-height:400px; }
+  .dp-step-body-inner { padding-bottom:1.5rem; }
+  .dp-phase-label { font-size:0.62rem; margin-bottom:.4rem; }
+  .dp-title { font-size:1rem; margin-bottom:.5rem; display:none; } /* shown in header */
+  .dp-text { font-size:0.85rem; margin-bottom:1rem; }
+  .dp-del { font-size:0.65rem; padding:.25rem .7rem; }
+
+  /* DIFF — compact accordion cards */
+  .why-diff { padding:2.5rem 5vw; }
+  .why-diff h2 { font-size:1.7rem; margin-bottom:2rem; }
+  .diff-grid {
+    display:flex;
+    flex-direction:column;
+    background:none;
+    border:none;
+    gap:.75rem;
+  }
+  .diff-card {
+    padding:1.5rem;
+    border:1px solid var(--border-light);
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .diff-title { display:flex; align-items:center; justify-content:space-between; font-size:1rem; }
+  .diff-title-icon {
+    width:20px; height:20px;
+    border:1px solid var(--border-light);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    transition:transform .3s;
+    font-size:0.8rem;
+    color:var(--gold);
+  }
+  .diff-card.open .diff-title-icon { transform:rotate(45deg); border-color:var(--gold); }
+  .diff-contrast {
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+    margin-top:0;
+  }
+  .diff-card.open .diff-contrast { max-height:300px; margin-top:1rem; }
+  .diff-others { font-size:0.82rem; }
+  .diff-us { font-size:0.82rem; }
+
+  /* CTA BAND */
+  .cta-band { padding:3.5rem 5vw; }
+  .cta-band h2 { font-size:1.9rem; margin-bottom:1rem; }
+  .cta-band p { font-size:0.88rem; margin-bottom:1.5rem; }
+  .cta-band-actions { flex-direction:column; align-items:stretch; gap:.75rem; }
+  .cta-band-actions .btn-primary,.cta-band-actions .btn-outline { justify-content:center; width:100%; }
+
+  /* FOOTER */
+  footer { padding:2.5rem 5vw 0; }
+  .footer-inner { grid-template-columns:1fr; gap:1.5rem; padding-bottom:2rem; }
+  .foot-brand { grid-column:auto; }
+  .foot-bottom { flex-direction:column; gap:.6rem; text-align:center; padding:1.25rem 0; }
 }
 </style>
 </head>
@@ -184,7 +328,6 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
   <button class="mobile-nav-btn" id="mBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- FIX: Separate dropdown -->
 <div class="mobile-nav-dropdown" id="mobileNav">
   <a href="werkwijze.html" style="color:var(--white);">Werkwijze</a>
   <a href="diensten.html">Diensten</a>
@@ -193,15 +336,13 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
   <a href="contact.html">Project starten →</a>
 </div>
 
-<!-- PAGE HERO -->
 <section class="page-hero">
   <div class="page-hero-rule"></div>
   <div class="page-kicker"><div class="page-kicker-line"></div><span class="page-kicker-text">Hoe ik werk</span></div>
   <h1>Geen verrassingen.<br>Alleen <span class="it">resultaten.</span></h1>
-  <p class="page-hero-sub">Een goed digitaal product begint niet met code. Het begint met begrip — van uw bedrijf, uw klanten en wat u écht wilt bereiken. Hier leest u precies hoe dat proces eruitziet.</p>
+  <p class="page-hero-sub">Een goed digitaal product begint niet met code. Het begint met begrip — van uw bedrijf, uw klanten en wat u écht wilt bereiken.</p>
 </section>
 
-<!-- MANIFESTO -->
 <div class="manifesto reveal">
   <div>
     <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">De filosofie</span></div>
@@ -212,132 +353,205 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
     <div class="manifesto-points">
       <div class="m-point">
         <div class="m-point-title">Luisteren voor bouwen</div>
-        <p class="m-point-text">Elk project begint met vragen. Wat wilt u bereiken? Wie zijn uw gebruikers? Wat werkt nu niet? Pas als ik die antwoorden begrijp, ga ik aan de slag.</p>
+        <p class="m-point-text">Elk project begint met vragen. Wat wilt u bereiken? Wie zijn uw gebruikers? Wat werkt nu niet?</p>
       </div>
       <div class="m-point">
         <div class="m-point-title">Eenvoud boven complexiteit</div>
-        <p class="m-point-text">De beste oplossing is zelden de meest ingewikkelde. Ik kies voor wat werkt, schaalbaar is en door u of uw team begrepen kan worden.</p>
+        <p class="m-point-text">De beste oplossing is zelden de meest ingewikkelde. Ik kies voor wat werkt en schaalbaar is.</p>
       </div>
       <div class="m-point">
         <div class="m-point-title">Eerlijkheid altijd</div>
-        <p class="m-point-text">Als iets niet haalbaar is binnen uw budget, zeg ik dat. Als er een betere aanpak is dan u bedacht had, laat ik dat zien. Geen mooipraterij.</p>
+        <p class="m-point-text">Als iets niet haalbaar is binnen uw budget, zeg ik dat. Geen mooipraterij.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- PRINCIPLES -->
 <section class="principles">
   <div class="sec-hd reveal">
     <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">De principes</span></div>
     <h2>Wat ik in elk project<br><span class="it">meeneem</span></h2>
   </div>
+  <p class="principles-scroll-hint" id="princHint" style="display:none">Veeg voor meer</p>
   <div class="principles-grid reveal">
     <div class="principle">
       <div class="p-number">1</div>
       <div class="p-tag">Communicatie</div>
       <div class="p-title">U hoeft nooit te vragen hoe het staat</div>
-      <p class="p-text">Wekelijkse updates, een gedeelde projectomgeving en een open lijn. U bent altijd op de hoogte zonder ernaar te moeten vragen.</p>
+      <p class="p-text">Wekelijkse updates, een gedeelde projectomgeving en een open lijn. U bent altijd op de hoogte.</p>
     </div>
     <div class="principle">
       <div class="p-number">2</div>
       <div class="p-tag">Kwaliteit</div>
       <div class="p-title">Code die over vijf jaar nog begrijpelijk is</div>
-      <p class="p-text">Ik schrijf geen wegwerpcode. Alles is gedocumenteerd, getest en zo opgebouwd dat het makkelijk uitgebreid en overdraagbaar is.</p>
+      <p class="p-text">Ik schrijf geen wegwerpcode. Alles is gedocumenteerd, getest en makkelijk uitbreidbaar.</p>
     </div>
     <div class="principle">
       <div class="p-number">3</div>
       <div class="p-tag">Snelheid</div>
       <div class="p-title">Snel zonder concessies aan kwaliteit</div>
-      <p class="p-text">Door gestructureerd te werken en vroeg te valideren gaat er geen tijd verloren aan revisies. We bouwen het in één keer goed.</p>
+      <p class="p-text">Door gestructureerd te werken en vroeg te valideren gaat er geen tijd verloren aan revisies.</p>
     </div>
     <div class="principle">
       <div class="p-number">4</div>
       <div class="p-tag">Eigenaarschap</div>
       <div class="p-title">Alles is van u, altijd</div>
-      <p class="p-text">Alle code, domeinen, accounts en bestanden staan op uw naam. U bent nooit afhankelijk van mij om verder te gaan.</p>
+      <p class="p-text">Alle code, domeinen, accounts en bestanden staan op uw naam. U bent nooit afhankelijk van mij.</p>
     </div>
     <div class="principle">
       <div class="p-number">5</div>
       <div class="p-tag">Eerlijkheid</div>
       <div class="p-title">Ik zeg wat ik denk, ook als het ongemakkelijk is</div>
-      <p class="p-text">Als een idee niet goed is, zeg ik dat — met uitleg en een alternatief. U huurt mij in voor mijn expertise, niet voor bevestiging.</p>
+      <p class="p-text">Als een idee niet goed is, zeg ik dat — met uitleg en een alternatief.</p>
     </div>
     <div class="principle">
       <div class="p-number">6</div>
       <div class="p-tag">Continuïteit</div>
       <div class="p-title">De lancering is het begin van onze samenwerking</div>
-      <p class="p-text">Na oplevering blijf ik beschikbaar. Uw product groeit, en ik groei mee. Geen handover naar een supportdesk die u niet kent.</p>
+      <p class="p-text">Na oplevering blijf ik beschikbaar. Uw product groeit, en ik groei mee.</p>
     </div>
   </div>
 </section>
 
-<!-- DEEP PROCESS -->
 <section class="deep-process">
   <div class="reveal">
     <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Het proces in detail</span></div>
     <h2>Elke stap,<br><span class="it">uitgelegd</span></h2>
-    <p class="dp-intro">Dit is niet een vaag stappenplan dat er mooi uitziet. Dit is hoe een project er in werkelijkheid uitziet — van het eerste gesprek tot maanden na de lancering.</p>
+    <p class="dp-intro">Dit is hoe een project er in werkelijkheid uitziet — van het eerste gesprek tot maanden na de lancering.</p>
   </div>
   <div class="dp-steps reveal">
+
     <div class="dp-step">
+      <!-- desktop layout -->
       <div class="dp-step-num-wrap"><div class="dp-num">01</div></div>
       <div class="dp-content">
-        <div class="dp-phase-label">Week 1</div>
-        <div class="dp-title">Het kennismakingsgesprek</div>
-        <p class="dp-text">We beginnen altijd met een gesprek van 60 tot 90 minuten. Geen presentatie, geen verkoopverhaal. Ik stel vragen over uw bedrijf, uw klanten en wat u écht wilt bereiken. Pas na dit gesprek weet ik of en hoe ik u kan helpen.</p>
-        <div class="dp-deliverables"><span class="dp-del">Probleemanalyse</span><span class="dp-del">Doelstellingen helder</span><span class="dp-del">Eerlijk advies</span></div>
+        <!-- mobile header -->
+        <div class="dp-step-header">
+          <div class="dp-step-header-left">
+            <div class="dp-num-sm">01</div>
+            <span class="dp-title-sm">Het kennismakingsgesprek</span>
+          </div>
+          <div class="dp-step-icon"></div>
+        </div>
+        <div class="dp-step-body">
+          <div class="dp-step-body-inner">
+            <div class="dp-phase-label">Week 1</div>
+            <div class="dp-title">Het kennismakingsgesprek</div>
+            <p class="dp-text">We beginnen altijd met een gesprek van 60 tot 90 minuten. Geen presentatie, geen verkoopverhaal. Ik stel vragen over uw bedrijf, uw klanten en wat u écht wilt bereiken.</p>
+            <div class="dp-deliverables"><span class="dp-del">Probleemanalyse</span><span class="dp-del">Doelstellingen helder</span><span class="dp-del">Eerlijk advies</span></div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="dp-step">
       <div class="dp-step-num-wrap"><div class="dp-num">02</div></div>
       <div class="dp-content">
-        <div class="dp-phase-label">Week 1–2</div>
-        <div class="dp-title">Voorstel en akkoord</div>
-        <p class="dp-text">Na het gesprek ontvangt u binnen twee werkdagen een helder voorstel. Daarin staat precies wat ik ga bouwen, hoe lang het duurt, wat het kost en wat ik van u nodig heb. Geen vage uurtarieven, geen open einden.</p>
-        <div class="dp-deliverables"><span class="dp-del">Vaste prijs</span><span class="dp-del">Duidelijke scope</span><span class="dp-del">Realistische planning</span></div>
+        <div class="dp-step-header">
+          <div class="dp-step-header-left">
+            <div class="dp-num-sm">02</div>
+            <span class="dp-title-sm">Voorstel en akkoord</span>
+          </div>
+          <div class="dp-step-icon"></div>
+        </div>
+        <div class="dp-step-body">
+          <div class="dp-step-body-inner">
+            <div class="dp-phase-label">Week 1–2</div>
+            <div class="dp-title">Voorstel en akkoord</div>
+            <p class="dp-text">Na het gesprek ontvangt u binnen twee werkdagen een helder voorstel. Daarin staat precies wat ik ga bouwen, hoe lang het duurt en wat het kost. Geen open einden.</p>
+            <div class="dp-deliverables"><span class="dp-del">Vaste prijs</span><span class="dp-del">Duidelijke scope</span><span class="dp-del">Realistische planning</span></div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="dp-step">
       <div class="dp-step-num-wrap"><div class="dp-num">03</div></div>
       <div class="dp-content">
-        <div class="dp-phase-label">Week 2–4</div>
-        <div class="dp-title">Design — zien voor coderen</div>
-        <p class="dp-text">Voordat er één regel code wordt geschreven, ziet u het ontwerp. Ik maak interactieve mockups die u kunt doorklikken. U geeft feedback, wij passen aan. Dit voorkomt dure wijzigingen later in het proces.</p>
-        <div class="dp-deliverables"><span class="dp-del">Wireframes</span><span class="dp-del">Visueel ontwerp</span><span class="dp-del">Klikbaar prototype</span><span class="dp-del">2 revisierondes</span></div>
+        <div class="dp-step-header">
+          <div class="dp-step-header-left">
+            <div class="dp-num-sm">03</div>
+            <span class="dp-title-sm">Design — zien voor coderen</span>
+          </div>
+          <div class="dp-step-icon"></div>
+        </div>
+        <div class="dp-step-body">
+          <div class="dp-step-body-inner">
+            <div class="dp-phase-label">Week 2–4</div>
+            <div class="dp-title">Design — zien voor coderen</div>
+            <p class="dp-text">Voordat er één regel code wordt geschreven, ziet u het ontwerp. Ik maak interactieve mockups die u kunt doorklikken. Dit voorkomt dure wijzigingen later.</p>
+            <div class="dp-deliverables"><span class="dp-del">Wireframes</span><span class="dp-del">Visueel ontwerp</span><span class="dp-del">Prototype</span><span class="dp-del">2 revisierondes</span></div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="dp-step">
       <div class="dp-step-num-wrap"><div class="dp-num">04</div></div>
       <div class="dp-content">
-        <div class="dp-phase-label">Week 4–10</div>
-        <div class="dp-title">Bouw — zichtbaar van dag één</div>
-        <p class="dp-text">Zodra het ontwerp is goedgekeurd, begin ik met bouwen. U krijgt direct toegang tot een privéomgeving waar u het product in wording kunt volgen. Iedere week ontvangt u een update over wat er is gebouwd en wat er volgt.</p>
-        <div class="dp-deliverables"><span class="dp-del">Wekelijkse updates</span><span class="dp-del">Live preview-omgeving</span><span class="dp-del">Voortgangsrapportage</span></div>
+        <div class="dp-step-header">
+          <div class="dp-step-header-left">
+            <div class="dp-num-sm">04</div>
+            <span class="dp-title-sm">Bouw — zichtbaar van dag één</span>
+          </div>
+          <div class="dp-step-icon"></div>
+        </div>
+        <div class="dp-step-body">
+          <div class="dp-step-body-inner">
+            <div class="dp-phase-label">Week 4–10</div>
+            <div class="dp-title">Bouw — zichtbaar van dag één</div>
+            <p class="dp-text">U krijgt direct toegang tot een privéomgeving waar u het product in wording kunt volgen. Iedere week ontvangt u een update over wat er is gebouwd.</p>
+            <div class="dp-deliverables"><span class="dp-del">Wekelijkse updates</span><span class="dp-del">Live preview</span><span class="dp-del">Voortgangsrapportage</span></div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="dp-step">
       <div class="dp-step-num-wrap"><div class="dp-num">05</div></div>
       <div class="dp-content">
-        <div class="dp-phase-label">Week 10–11</div>
-        <div class="dp-title">Testen en verfijnen</div>
-        <p class="dp-text">Voor de lancering test ik het product grondig op alle apparaten en browsers. U heeft de kans het product zelf door te lopen en laatste opmerkingen door te geven. Kleine aanpassingen zijn gratis in deze fase.</p>
-        <div class="dp-deliverables"><span class="dp-del">Cross-device tests</span><span class="dp-del">Prestatieoptimalisatie</span><span class="dp-del">Acceptatietest met u</span></div>
+        <div class="dp-step-header">
+          <div class="dp-step-header-left">
+            <div class="dp-num-sm">05</div>
+            <span class="dp-title-sm">Testen en verfijnen</span>
+          </div>
+          <div class="dp-step-icon"></div>
+        </div>
+        <div class="dp-step-body">
+          <div class="dp-step-body-inner">
+            <div class="dp-phase-label">Week 10–11</div>
+            <div class="dp-title">Testen en verfijnen</div>
+            <p class="dp-text">Voor de lancering test ik het product grondig op alle apparaten en browsers. U heeft de kans het product zelf door te lopen en laatste opmerkingen door te geven.</p>
+            <div class="dp-deliverables"><span class="dp-del">Cross-device tests</span><span class="dp-del">Prestatieoptimalisatie</span><span class="dp-del">Acceptatietest</span></div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="dp-step">
       <div class="dp-step-num-wrap"><div class="dp-num">06</div></div>
       <div class="dp-content">
-        <div class="dp-phase-label">Week 12 en verder</div>
-        <div class="dp-title">Lancering en langdurige ondersteuning</div>
-        <p class="dp-text">De livegang is een gecontroleerd moment. Na lancering monitor ik het product intensief de eerste weken. Daarna stappen we over naar een onderhoudsplan dat bij uw situatie past.</p>
-        <div class="dp-deliverables"><span class="dp-del">Gecontroleerde livegang</span><span class="dp-del">Intensieve monitoring</span><span class="dp-del">Doorlopend onderhoud</span></div>
+        <div class="dp-step-header">
+          <div class="dp-step-header-left">
+            <div class="dp-num-sm">06</div>
+            <span class="dp-title-sm">Lancering en ondersteuning</span>
+          </div>
+          <div class="dp-step-icon"></div>
+        </div>
+        <div class="dp-step-body">
+          <div class="dp-step-body-inner">
+            <div class="dp-phase-label">Week 12 en verder</div>
+            <div class="dp-title">Lancering en langdurige ondersteuning</div>
+            <p class="dp-text">Na lancering monitor ik het product intensief de eerste weken. Daarna stappen we over naar een onderhoudsplan dat bij uw situatie past.</p>
+            <div class="dp-deliverables"><span class="dp-del">Gecontroleerde livegang</span><span class="dp-del">Intensieve monitoring</span><span class="dp-del">Doorlopend onderhoud</span></div>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- WHY DIFFERENT -->
 <section class="why-diff">
   <div class="reveal">
     <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Het verschil</span></div>
@@ -345,37 +559,36 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
   </div>
   <div class="diff-grid reveal">
     <div class="diff-card">
-      <div class="diff-title" style="margin-bottom:1.5rem;">Wie u spreekt</div>
+      <div class="diff-title">Wie u spreekt <span class="diff-title-icon">+</span></div>
       <div class="diff-contrast">
-        <div><div class="diff-col-label">Anderen</div><p class="diff-others">Een accountmanager neemt contact op. Een projectleider plant een call. Een developer u nooit ontmoet bouwt het.</p></div>
+        <div><div class="diff-col-label">Anderen</div><p class="diff-others">Een accountmanager neemt contact op. Een developer u nooit ontmoet bouwt het.</p></div>
         <div><div class="diff-col-label">Harings Development</div><p class="diff-us">U spreekt altijd direct met Noa — de persoon die ook daadwerkelijk uw product bouwt.</p></div>
       </div>
     </div>
     <div class="diff-card">
-      <div class="diff-title" style="margin-bottom:1.5rem;">Na de lancering</div>
+      <div class="diff-title">Na de lancering <span class="diff-title-icon">+</span></div>
       <div class="diff-contrast">
-        <div><div class="diff-col-label">Anderen</div><p class="diff-others">Project afgesloten. Stuur een ticket voor ondersteuning. Wacht op een reactie van iemand die uw product niet kent.</p></div>
-        <div><div class="diff-col-label">Harings Development</div><p class="diff-us">Ik blijf betrokken. Directe lijn, maandelijkse check-ins en proactief onderhoud zonder dat u erom hoeft te vragen.</p></div>
+        <div><div class="diff-col-label">Anderen</div><p class="diff-others">Project afgesloten. Stuur een ticket voor ondersteuning.</p></div>
+        <div><div class="diff-col-label">Harings Development</div><p class="diff-us">Ik blijf betrokken. Directe lijn en proactief onderhoud zonder dat u erom hoeft te vragen.</p></div>
       </div>
     </div>
     <div class="diff-card">
-      <div class="diff-title" style="margin-bottom:1.5rem;">Transparantie over kosten</div>
+      <div class="diff-title">Transparantie over kosten <span class="diff-title-icon">+</span></div>
       <div class="diff-contrast">
-        <div><div class="diff-col-label">Anderen</div><p class="diff-others">Uurtarieven die oplopen. Meerwerk bij elke kleine aanpassing. Facturen die hoger uitvallen dan verwacht.</p></div>
-        <div><div class="diff-col-label">Harings Development</div><p class="diff-us">Vaste projectprijzen. U weet vooraf wat het kost. Kleine aanpassingen tijdens het project zitten erin.</p></div>
+        <div><div class="diff-col-label">Anderen</div><p class="diff-others">Uurtarieven die oplopen. Facturen die hoger uitvallen dan verwacht.</p></div>
+        <div><div class="diff-col-label">Harings Development</div><p class="diff-us">Vaste projectprijzen. U weet vooraf wat het kost.</p></div>
       </div>
     </div>
     <div class="diff-card">
-      <div class="diff-title" style="margin-bottom:1.5rem;">Eigenaarschap</div>
+      <div class="diff-title">Eigenaarschap <span class="diff-title-icon">+</span></div>
       <div class="diff-contrast">
-        <div><div class="diff-col-label">Anderen</div><p class="diff-others">Proprietary platforms, gesloten systemen of code die u niet kunt meenemen als u wilt overstappen.</p></div>
-        <div><div class="diff-col-label">Harings Development</div><p class="diff-us">Alles staat op uw naam. Alle code, alle toegangen. U bent nooit afhankelijk van mij als u dat niet wilt.</p></div>
+        <div><div class="diff-col-label">Anderen</div><p class="diff-others">Gesloten systemen of code die u niet kunt meenemen als u wilt overstappen.</p></div>
+        <div><div class="diff-col-label">Harings Development</div><p class="diff-us">Alles staat op uw naam. Alle code, alle toegangen. Geen afhankelijkheid.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA BAND -->
 <div class="cta-band">
   <div class="cta-band-bg">WW</div>
   <div class="sec-tag reveal" style="justify-content:center;"><div class="sec-tag-line"></div><span class="sec-tag-text">Overtuigd?</span><div class="sec-tag-line"></div></div>
@@ -430,6 +643,35 @@ if(mBtn){
   mobileNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
   document.addEventListener('click',function(e){if(menuOpen&&!mBtn.contains(e.target)&&!mobileNav.contains(e.target))closeMenu();});
 }
+
+function isMobile(){return window.innerWidth<=768;}
+
+// Show scroll hints on mobile
+if(isMobile()){
+  var ph=document.getElementById('princHint');
+  if(ph) ph.style.display='flex';
+}
+
+// DEEP PROCESS accordion (mobile only)
+document.querySelectorAll('.dp-step-header').forEach(function(h){
+  h.addEventListener('click',function(){
+    if(!isMobile()) return;
+    var step=h.closest('.dp-step');
+    var wasOpen=step.classList.contains('open');
+    document.querySelectorAll('.dp-step').forEach(function(s){s.classList.remove('open');});
+    if(!wasOpen) step.classList.add('open');
+  });
+});
+
+// DIFF cards accordion (mobile only)
+document.querySelectorAll('.diff-card').forEach(function(card){
+  card.addEventListener('click',function(){
+    if(!isMobile()) return;
+    var wasOpen=card.classList.contains('open');
+    document.querySelectorAll('.diff-card').forEach(function(c){c.classList.remove('open');});
+    if(!wasOpen) card.classList.add('open');
+  });
+});
 </script>
 </body>
 </html>
