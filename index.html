@@ -238,25 +238,49 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
   .intro-band-text { font-size:1.1rem; line-height:1.5; }
 
   /* PROMISE BAND — horizontal scroll cards */
-  .promise-band {
-    display:flex;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    border-top:1px solid var(--border-dark);
-    border-bottom:1px solid var(--border-dark);
-    gap:0;
-    scrollbar-width:none;
-  }
-  .promise-band::-webkit-scrollbar { display:none; }
-  .promise-block {
-    min-width: 80vw;
-    scroll-snap-align:start;
-    border-right:1px solid var(--border-dark);
-    border-bottom:none;
-    padding:2rem;
-    flex-shrink:0;
-  }
+/* =========================================
+   PROMISE BAND — MOBILE CARD CAROUSEL
+   ========================================= */
+
+.promise-band {
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding: 0 5vw;
+  gap: 4vw;
+  border-top:1px solid var(--border-dark);
+  border-bottom:1px solid var(--border-dark);
+  scrollbar-width:none;
+}
+
+.promise-band::-webkit-scrollbar { display:none; }
+
+.promise-block {
+  flex: 0 0 88%;
+  scroll-snap-align: center;
+  border:1px solid var(--border-dark);
+  border-radius:14px;
+  background:var(--ink3);
+  padding:1.8rem;
+  border-right:none;
+}
+
+/* subtiel depth effect */
+.promise-block {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.promise-block:active {
+  transform: scale(.98);
+}
+
+/* eerste card mooi uitlijnen */
+.promise-band::before,
+.promise-band::after {
+  content:'';
+  flex: 0 0 2vw;
+}
   .promise-band-hint {
     display:flex;
     align-items:center;
