@@ -14,7 +14,6 @@
 html{scroll-behavior:smooth;}
 body{background:var(--ink);color:var(--white);font-family:'Epilogue',sans-serif;font-weight:300;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9997;opacity:.5;}
-/* NAV FIX */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:2rem 5vw;display:flex;align-items:center;justify-content:space-between;transition:background .5s,border-bottom .5s;overflow:visible;}
 nav.scrolled{background:rgba(14,14,18,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-dark);}
 .nav-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);text-decoration:none;}
@@ -26,11 +25,11 @@ nav.scrolled{background:rgba(14,14,18,0.92);backdrop-filter:blur(16px);-webkit-b
 .nav-cta:hover{opacity:.65;}
 .mobile-nav-btn{display:none;flex-direction:column;gap:5px;padding:4px;background:none;border:none;-webkit-tap-highlight-color:transparent;}
 .mobile-nav-btn span{display:block;width:22px;height:1px;background:var(--white);}
-/* FIX: Mobile dropdown fixed */
 .mobile-nav-dropdown{display:none;flex-direction:column;position:fixed;top:72px;left:0;right:0;z-index:499;background:rgba(14,14,18,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:2rem 5vw;gap:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);}
 .mobile-nav-dropdown.open{display:flex;}
 .mobile-nav-dropdown a{font-size:0.9rem;font-weight:400;color:rgba(250,249,246,0.7);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05);}
 .mobile-nav-dropdown a:last-child{border-bottom:none;color:var(--gold);}
+
 .page-hero{padding:18vh 5vw 8vh;position:relative;overflow:hidden;border-bottom:1px solid var(--border-dark);}
 .page-hero-rule{position:absolute;top:0;right:18vw;bottom:0;width:1px;background:var(--border-dark);}
 .page-kicker{display:flex;align-items:center;gap:1.2rem;margin-bottom:2.5rem;opacity:0;animation:fadeUp .9s .1s ease forwards;}
@@ -126,7 +125,6 @@ h2 .it{font-style:italic;}
 .cta-band p{color:rgba(250,249,246,0.42);max-width:460px;margin:0 auto 3rem;line-height:1.75;position:relative;z-index:1;}
 .cta-band-actions{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
 
-/* FOOTER */
 footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--border-dark);}
 .footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr;gap:5vw;padding-bottom:4rem;border-bottom:1px solid var(--border-dark);}
 .foot-brand-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:1rem;}
@@ -148,17 +146,143 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
   .footer-inner{grid-template-columns:1fr 1fr;gap:3rem;}
   .foot-brand{grid-column:1/-1;}
 }
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
 @media(max-width:768px){
-  nav{padding:1.25rem 5vw;}
+  nav{padding:1.1rem 5vw;}
   .nav-links,.nav-cta{display:none;}
   .mobile-nav-btn{display:flex;}
-  .page-hero{padding-top:14vh;}
-  h1{font-size:clamp(2.8rem,10vw,4rem);}
-  .service-block{padding:3rem 0;}
-  .cta-band-actions{flex-direction:column;align-items:center;}
-  .footer-inner{grid-template-columns:1fr;}
-  .foot-bottom{flex-direction:column;gap:.6rem;text-align:center;}
   body::after{display:none;}
+
+  /* HERO */
+  .page-hero{padding:11vh 5vw 3rem;}
+  .page-hero-rule{display:none;}
+  h1{font-size:clamp(2.2rem,9vw,3.2rem);}
+  .page-kicker{margin-bottom:1.2rem;}
+  .page-hero-sub{font-size:0.88rem;margin-top:1.2rem;max-width:100%;}
+
+  /* SERVICES INTRO — single col compact */
+  .services-intro{padding:2.5rem 5vw;gap:1.5rem;}
+  .services-intro h2{font-size:1.7rem;margin-bottom:1rem;}
+  .si-lead{font-size:1rem;margin-bottom:1rem;}
+  .si-text{font-size:0.85rem;}
+
+  /* SERVICE BLOCKS — card style accordion */
+  .service-blocks{padding:2.5rem 5vw;}
+  .service-blocks > .reveal > h2{font-size:1.7rem;margin-bottom:2rem;}
+  .service-block{
+    display:block;
+    padding:0;
+    border-bottom:1px solid var(--border-dark);
+  }
+  .service-block:last-child{border-bottom:none;}
+  .sb-block-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:1.2rem 0;
+    cursor:pointer;
+    gap:1rem;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .sb-block-header-left{
+    display:flex;
+    align-items:center;
+    gap:.75rem;
+  }
+  .sb-tag-sm{
+    font-size:0.62rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+    white-space:nowrap;
+  }
+  .sb-title-sm{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:1rem;
+    color:var(--white);
+    line-height:1.2;
+  }
+  .sb-icon{
+    width:22px;height:22px;
+    border:1px solid var(--border-dark);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    transition:transform .3s, border-color .3s;
+  }
+  .sb-icon::before{content:'+';font-size:.9rem;color:var(--gold);line-height:1;}
+  .service-block.open .sb-icon{transform:rotate(45deg);border-color:var(--gold);}
+  .sb-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+  .service-block.open .sb-body{max-height:800px;}
+  .sb-body-inner{padding-bottom:1.5rem;}
+  /* hide desktop visual on mobile */
+  .sb-visual{display:none;}
+  .sb-tag{display:none;}
+  .sb-title{font-size:1.1rem;margin-bottom:.75rem;}
+  .sb-text{font-size:0.88rem;margin-bottom:1rem;}
+  .sb-includes{margin-bottom:1.5rem;gap:.4rem;}
+  .sb-include{font-size:0.82rem;}
+  .btn-primary{padding:.85rem 1.5rem;font-size:0.76rem;width:100%;justify-content:center;}
+
+  /* PACKAGES — horizontal scroll */
+  .packages{padding:2.5rem 5vw;}
+  .packages h2{font-size:1.7rem;margin-bottom:.75rem;}
+  .packages-intro{font-size:0.88rem;margin-bottom:2rem;}
+  .packages-grid{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    border:none;
+    gap:1rem;
+    scrollbar-width:none;
+    padding-bottom:.5rem;
+  }
+  .packages-grid::-webkit-scrollbar{display:none;}
+  .package{
+    min-width:72vw;
+    scroll-snap-align:start;
+    border:1px solid var(--border-dark);
+    border-right:1px solid var(--border-dark) !important;
+    border-bottom:1px solid var(--border-dark) !important;
+    flex-shrink:0;
+  }
+  .packages-scroll-hint{
+    font-size:0.62rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:rgba(250,249,246,0.25);
+    margin-bottom:1rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .packages-scroll-hint::after{content:'→';color:var(--gold);animation:nudge 1.5s ease-in-out infinite;}
+  @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+
+  /* FAQ */
+  .faq{padding:2.5rem 5vw;}
+  .faq h2{font-size:1.7rem;margin-bottom:2rem;}
+  .faq-q{padding:1.2rem 0;}
+  .faq-q-text{font-size:0.95rem;}
+
+  /* CTA BAND */
+  .cta-band{padding:3.5rem 5vw;}
+  .cta-band h2{font-size:1.9rem;margin-bottom:1rem;}
+  .cta-band p{font-size:0.88rem;margin-bottom:1.5rem;}
+  .cta-band-actions{flex-direction:column;align-items:stretch;gap:.75rem;}
+  .cta-band-actions .btn-primary,.cta-band-actions .btn-outline{justify-content:center;width:100%;}
+
+  /* FOOTER */
+  footer{padding:2.5rem 5vw 0;}
+  .footer-inner{grid-template-columns:1fr;gap:1.5rem;padding-bottom:2rem;}
+  .foot-brand{grid-column:auto;}
+  .foot-bottom{flex-direction:column;gap:.6rem;text-align:center;padding:1.25rem 0;}
 }
 </style>
 </head>
@@ -176,7 +300,6 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
   <button class="mobile-nav-btn" id="mBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- FIX: Separate dropdown -->
 <div class="mobile-nav-dropdown" id="mobileNav">
   <a href="werkwijze.html">Werkwijze</a>
   <a href="diensten.html" style="color:var(--white);">Diensten</a>
@@ -192,7 +315,6 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
   <p class="page-hero-sub">Of u nu een website, een app of een volledig digitaal platform nodig heeft — ik lever het complete plaatje. Design, ontwikkeling, lancering en alles daarna.</p>
 </section>
 
-<!-- SERVICES INTRO -->
 <div class="services-intro reveal">
   <div>
     <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">De kern</span></div>
@@ -204,7 +326,6 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
   </div>
 </div>
 
-<!-- SERVICE BLOCKS -->
 <section class="service-blocks">
   <div class="reveal">
     <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Diensten</span></div>
@@ -212,101 +333,146 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
   </div>
 
   <div class="service-block reveal">
-    <div class="sb-info">
-      <div class="sb-tag">Dienst 01</div>
-      <div class="sb-title">Websites &amp;<br><span class="it">Webapplicaties</span></div>
-      <p class="sb-text">Van een representatieve bedrijfswebsite tot een complexe webapplicatie met gebruikersaccounts, databases en koppelingen. Ik bouw wat u nodig heeft — niet meer, niet minder. Snel, veilig en vindbaar in zoekmachines.</p>
-      <div class="sb-includes">
-        <div class="sb-include">Volledig op maat ontworpen en gebouwd</div>
-        <div class="sb-include">Geoptimaliseerd voor Google (SEO)</div>
-        <div class="sb-include">Snel op elk apparaat en browser</div>
-        <div class="sb-include">CMS zodat u zelf content kunt beheren</div>
-        <div class="sb-include">Veilig en GDPR-conform</div>
+    <!-- mobile header -->
+    <div class="sb-block-header">
+      <div class="sb-block-header-left">
+        <span class="sb-tag-sm">01</span>
+        <span class="sb-title-sm">Websites &amp; Webapplicaties</span>
       </div>
-      <a href="contact.html" class="btn-primary">Website bespreken <span class="arr">→</span></a>
+      <div class="sb-icon"></div>
     </div>
-    <div class="sb-visual">
-      <div class="sb-visual-num">01</div>
-      <div class="sb-visual-label">Web Development</div>
-      <div class="sb-visual-sub">Van eenvoudige presentatiesite tot volwaardige webapplicatie — alles gebouwd met het oog op snelheid, vindbaarheid en gebruiksgemak.</div>
+    <div class="sb-body">
+      <div class="sb-body-inner">
+        <div class="sb-info">
+          <div class="sb-tag">Dienst 01</div>
+          <div class="sb-title">Websites &amp;<br><span class="it">Webapplicaties</span></div>
+          <p class="sb-text">Van een representatieve bedrijfswebsite tot een complexe webapplicatie met gebruikersaccounts, databases en koppelingen. Snel, veilig en vindbaar in zoekmachines.</p>
+          <div class="sb-includes">
+            <div class="sb-include">Volledig op maat ontworpen en gebouwd</div>
+            <div class="sb-include">Geoptimaliseerd voor Google (SEO)</div>
+            <div class="sb-include">Snel op elk apparaat en browser</div>
+            <div class="sb-include">CMS zodat u zelf content kunt beheren</div>
+            <div class="sb-include">Veilig en GDPR-conform</div>
+          </div>
+          <a href="contact.html" class="btn-primary">Website bespreken <span class="arr">→</span></a>
+        </div>
+        <div class="sb-visual">
+          <div class="sb-visual-num">01</div>
+          <div class="sb-visual-label">Web Development</div>
+          <div class="sb-visual-sub">Van eenvoudige presentatiesite tot volwaardige webapplicatie.</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="service-block reveal">
-    <div class="sb-info">
-      <div class="sb-tag">Dienst 02</div>
-      <div class="sb-title">Mobiele Apps<br><span class="it">iOS &amp; Android</span></div>
-      <p class="sb-text">Eén app die werkt op zowel iPhone als Android, gebouwd met moderne cross-platform technologie. Ik bouw apps die aanvoelen als native — soepel, intuïtief en schaalbaar. Van idee tot verschijning in de App Store en Google Play.</p>
-      <div class="sb-includes">
-        <div class="sb-include">Eén codebase voor iOS en Android</div>
-        <div class="sb-include">Native uitstraling en performance</div>
-        <div class="sb-include">Publicatie in App Store en Google Play</div>
-        <div class="sb-include">Koppeling met bestaande systemen</div>
-        <div class="sb-include">Doorlopende updates en ondersteuning</div>
+    <div class="sb-block-header">
+      <div class="sb-block-header-left">
+        <span class="sb-tag-sm">02</span>
+        <span class="sb-title-sm">Mobiele Apps iOS &amp; Android</span>
       </div>
-      <a href="contact.html" class="btn-primary">App bespreken <span class="arr">→</span></a>
+      <div class="sb-icon"></div>
     </div>
-    <div class="sb-visual">
-      <div class="sb-visual-num">02</div>
-      <div class="sb-visual-label">App Development</div>
-      <div class="sb-visual-sub">Native-achtige mobiele ervaring op elk platform, gebouwd voor echte gebruikers en klaar voor groei.</div>
+    <div class="sb-body">
+      <div class="sb-body-inner">
+        <div class="sb-info">
+          <div class="sb-tag">Dienst 02</div>
+          <div class="sb-title">Mobiele Apps<br><span class="it">iOS &amp; Android</span></div>
+          <p class="sb-text">Eén app die werkt op zowel iPhone als Android, gebouwd met moderne cross-platform technologie. Van idee tot verschijning in de App Store en Google Play.</p>
+          <div class="sb-includes">
+            <div class="sb-include">Eén codebase voor iOS en Android</div>
+            <div class="sb-include">Native uitstraling en performance</div>
+            <div class="sb-include">Publicatie in App Store en Google Play</div>
+            <div class="sb-include">Koppeling met bestaande systemen</div>
+            <div class="sb-include">Doorlopende updates en ondersteuning</div>
+          </div>
+          <a href="contact.html" class="btn-primary">App bespreken <span class="arr">→</span></a>
+        </div>
+        <div class="sb-visual">
+          <div class="sb-visual-num">02</div>
+          <div class="sb-visual-label">App Development</div>
+          <div class="sb-visual-sub">Native-achtige mobiele ervaring op elk platform.</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="service-block reveal">
-    <div class="sb-info">
-      <div class="sb-tag">Dienst 03</div>
-      <div class="sb-title">UI/UX Design &amp;<br><span class="it">Prototyping</span></div>
-      <p class="sb-text">Goed design is niet alleen mooi — het zorgt dat mensen intuïtief door uw product navigeren en doen wat u wilt dat ze doen. Ik ontwerp interfaces die zowel visueel sterk zijn als werkelijk bruikbaar. Altijd gebaseerd op de behoeften van uw gebruikers.</p>
-      <div class="sb-includes">
-        <div class="sb-include">Gebruikersonderzoek en flows</div>
-        <div class="sb-include">Wireframes en klikbaar prototype</div>
-        <div class="sb-include">Visueel systeem en stijlgids</div>
-        <div class="sb-include">Ontwerp klaar voor overdracht aan development</div>
+    <div class="sb-block-header">
+      <div class="sb-block-header-left">
+        <span class="sb-tag-sm">03</span>
+        <span class="sb-title-sm">UI/UX Design &amp; Prototyping</span>
       </div>
-      <a href="contact.html" class="btn-primary">Design bespreken <span class="arr">→</span></a>
+      <div class="sb-icon"></div>
     </div>
-    <div class="sb-visual">
-      <div class="sb-visual-num">03</div>
-      <div class="sb-visual-label">Design & UX</div>
-      <div class="sb-visual-sub">Interfaces die mensen begrijpen en gebruiken — want het mooiste product is waardeloos als niemand erdoorheen kan navigeren.</div>
+    <div class="sb-body">
+      <div class="sb-body-inner">
+        <div class="sb-info">
+          <div class="sb-tag">Dienst 03</div>
+          <div class="sb-title">UI/UX Design &amp;<br><span class="it">Prototyping</span></div>
+          <p class="sb-text">Goed design is niet alleen mooi — het zorgt dat mensen intuïtief door uw product navigeren. Ik ontwerp interfaces die visueel sterk en werkelijk bruikbaar zijn.</p>
+          <div class="sb-includes">
+            <div class="sb-include">Gebruikersonderzoek en flows</div>
+            <div class="sb-include">Wireframes en klikbaar prototype</div>
+            <div class="sb-include">Visueel systeem en stijlgids</div>
+            <div class="sb-include">Ontwerp klaar voor overdracht</div>
+          </div>
+          <a href="contact.html" class="btn-primary">Design bespreken <span class="arr">→</span></a>
+        </div>
+        <div class="sb-visual">
+          <div class="sb-visual-num">03</div>
+          <div class="sb-visual-label">Design & UX</div>
+          <div class="sb-visual-sub">Interfaces die mensen begrijpen en gebruiken.</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="service-block reveal">
-    <div class="sb-info">
-      <div class="sb-tag">Dienst 04</div>
-      <div class="sb-title">Onderhoud &amp;<br><span class="it">Doorontwikkeling</span></div>
-      <p class="sb-text">Na de lancering begint het eigenlijke werk. Ik houd uw digitale product draaiend, veilig en up-to-date. En als u wilt groeien, bouw ik nieuwe functies, analyseer ik het gebruik en adviseer ik over de volgende stap. Maandelijks, of zo intensief als u wilt.</p>
-      <div class="sb-includes">
-        <div class="sb-include">Beveiligingsupdates en technisch onderhoud</div>
-        <div class="sb-include">Maandelijkse prestatieanalyse</div>
-        <div class="sb-include">Nieuwe functies op aanvraag</div>
-        <div class="sb-include">Directe lijn voor vragen en fixes</div>
-        <div class="sb-include">Doorlopend advies over optimalisaties</div>
+    <div class="sb-block-header">
+      <div class="sb-block-header-left">
+        <span class="sb-tag-sm">04</span>
+        <span class="sb-title-sm">Onderhoud &amp; Doorontwikkeling</span>
       </div>
-      <a href="contact.html" class="btn-primary">Onderhoud bespreken <span class="arr">→</span></a>
+      <div class="sb-icon"></div>
     </div>
-    <div class="sb-visual">
-      <div class="sb-visual-num">04</div>
-      <div class="sb-visual-label">Onderhoud & Groei</div>
-      <div class="sb-visual-sub">Uw product staat nooit stil. Ik zorg dat het meegroeit met uw bedrijf en altijd op z'n best presteert.</div>
+    <div class="sb-body">
+      <div class="sb-body-inner">
+        <div class="sb-info">
+          <div class="sb-tag">Dienst 04</div>
+          <div class="sb-title">Onderhoud &amp;<br><span class="it">Doorontwikkeling</span></div>
+          <p class="sb-text">Na de lancering begint het eigenlijke werk. Ik houd uw digitale product draaiend, veilig en up-to-date. En als u wilt groeien, bouw ik nieuwe functies.</p>
+          <div class="sb-includes">
+            <div class="sb-include">Beveiligingsupdates en technisch onderhoud</div>
+            <div class="sb-include">Maandelijkse prestatieanalyse</div>
+            <div class="sb-include">Nieuwe functies op aanvraag</div>
+            <div class="sb-include">Directe lijn voor vragen en fixes</div>
+            <div class="sb-include">Doorlopend advies over optimalisaties</div>
+          </div>
+          <a href="contact.html" class="btn-primary">Onderhoud bespreken <span class="arr">→</span></a>
+        </div>
+        <div class="sb-visual">
+          <div class="sb-visual-num">04</div>
+          <div class="sb-visual-label">Onderhoud & Groei</div>
+          <div class="sb-visual-sub">Uw product staat nooit stil.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PACKAGES -->
 <section class="packages">
   <div class="reveal">
     <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Ondersteuningspakketten</span></div>
     <h2>Na de lancering:<br><span class="it">kies uw pakket</span></h2>
-    <p class="packages-intro">Na een project stapt u over naar een van de drie onderhoudsvormen. Zo weet u altijd wat u betaalt en wat u terugkrijgt.</p>
+    <p class="packages-intro">Na een project stapt u over naar een van de drie onderhoudsvormen.</p>
   </div>
+  <p class="packages-scroll-hint" style="display:none" id="pkgHint">Veeg voor meer</p>
   <div class="packages-grid reveal">
     <div class="package">
       <div class="pkg-badge">Basis</div>
       <div class="pkg-name">Stabiel</div>
-      <div class="pkg-tagline">Voor websites die betrouwbaar moeten blijven draaien zonder grote doorontwikkeling.</div>
+      <div class="pkg-tagline">Voor websites die betrouwbaar moeten blijven draaien.</div>
       <div class="pkg-divider"></div>
       <div class="pkg-features">
         <div class="pkg-feature">Maandelijkse beveiligingsupdates</div>
@@ -319,7 +485,7 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
     <div class="package featured">
       <div class="pkg-badge">Meest gekozen</div>
       <div class="pkg-name">Groei</div>
-      <div class="pkg-tagline">Voor bedrijven die niet stilstaan — u wilt optimaliseren, analyseren en doorgroeien.</div>
+      <div class="pkg-tagline">Voor bedrijven die niet stilstaan — optimaliseren en doorgroeien.</div>
       <div class="pkg-divider"></div>
       <div class="pkg-features">
         <div class="pkg-feature">Alles uit Stabiel</div>
@@ -333,7 +499,7 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
     <div class="package">
       <div class="pkg-badge">Volledig</div>
       <div class="pkg-name">Prioriteit</div>
-      <div class="pkg-tagline">Voor platforms waarbij stilstand geen optie is en doorontwikkeling continu doorgaat.</div>
+      <div class="pkg-tagline">Voor platforms waarbij stilstand geen optie is.</div>
       <div class="pkg-divider"></div>
       <div class="pkg-features">
         <div class="pkg-feature">Alles uit Groei</div>
@@ -347,7 +513,6 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
   </div>
 </section>
 
-<!-- FAQ -->
 <section class="faq">
   <div class="reveal">
     <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Veelgestelde vragen</span></div>
@@ -356,37 +521,36 @@ footer{background:var(--ink2);padding:5rem 5vw 0;border-top:1px solid var(--bord
   <div class="faq-list reveal">
     <div class="faq-item">
       <div class="faq-q"><span class="faq-q-text">Wat kost een website of app?</span><div class="faq-icon"></div></div>
-      <div class="faq-a"><p>Dat hangt af van de omvang en complexiteit. Ik werk met vaste projectprijzen, zodat u vooraf weet wat het kost. Na ons eerste gesprek stuur ik u een helder voorstel met een vaste prijs. Geen uurtarieven die kunnen oplopen.</p></div>
+      <div class="faq-a"><p>Ik werk met vaste projectprijzen, zodat u vooraf weet wat het kost. Na ons eerste gesprek stuur ik u een helder voorstel. Geen uurtarieven die kunnen oplopen.</p></div>
     </div>
     <div class="faq-item">
       <div class="faq-q"><span class="faq-q-text">Hoe lang duurt een project?</span><div class="faq-icon"></div></div>
-      <div class="faq-a"><p>Een eenvoudige website duurt gemiddeld vier tot zes weken. Een complexere webapplicatie of app duurt acht tot twaalf weken. In het voorstel staat altijd een concrete planning. Ik hou me aan deadlines — en als er iets verandert, communiceer ik dat vroeg.</p></div>
+      <div class="faq-a"><p>Een eenvoudige website duurt gemiddeld vier tot zes weken. Een complexere webapplicatie of app duurt acht tot twaalf weken. In het voorstel staat altijd een concrete planning.</p></div>
     </div>
     <div class="faq-item">
       <div class="faq-q"><span class="faq-q-text">Kan ik mijn website zelf aanpassen na de lancering?</span><div class="faq-icon"></div></div>
-      <div class="faq-a"><p>Ja. Ik bouw websites met een gebruiksvriendelijk CMS waarmee u teksten, afbeeldingen en pagina's zelf kunt aanpassen zonder technische kennis. Ik geef u een introductie en een handleiding.</p></div>
+      <div class="faq-a"><p>Ja. Ik bouw websites met een gebruiksvriendelijk CMS waarmee u teksten, afbeeldingen en pagina's zelf kunt aanpassen zonder technische kennis.</p></div>
     </div>
     <div class="faq-item">
       <div class="faq-q"><span class="faq-q-text">Ik heb al een website. Kunnen jullie die verbeteren?</span><div class="faq-icon"></div></div>
-      <div class="faq-a"><p>Absoluut. Ik kijk graag naar wat u al heeft en adviseer eerlijk of een verbetering of een volledig nieuw project meer oplevert. Soms is een bestaande website met wat aanpassingen al sterk verbeterd. Soms is nieuw bouwen slimmer. Ik geef u dat advies zonder bijbedoelingen.</p></div>
+      <div class="faq-a"><p>Absoluut. Ik kijk graag naar wat u al heeft en adviseer eerlijk of een verbetering of een volledig nieuw project meer oplevert.</p></div>
     </div>
     <div class="faq-item">
       <div class="faq-q"><span class="faq-q-text">Wat als ik later wil overstappen naar een ander bureau?</span><div class="faq-icon"></div></div>
-      <div class="faq-a"><p>Dan kunt u dat doen. Alle code, accounts en domeinen staan op uw naam. U ontvangt volledige documentatie. Ik bouw geen afhankelijkheden in die u aan mij binden. Uw vrijheid is mijn uitgangspunt.</p></div>
+      <div class="faq-a"><p>Dan kunt u dat doen. Alle code, accounts en domeinen staan op uw naam. U ontvangt volledige documentatie. Uw vrijheid is mijn uitgangspunt.</p></div>
     </div>
     <div class="faq-item">
       <div class="faq-q"><span class="faq-q-text">Werk je ook samen met andere bedrijven of bureaus?</span><div class="faq-icon"></div></div>
-      <div class="faq-a"><p>Ja. Ik werk graag samen met merkenbureaus, marketingteams of andere partijen die al betrokken zijn bij uw project. Ik pas me aan de samenwerking aan en zorg voor heldere communicatie met alle betrokkenen.</p></div>
+      <div class="faq-a"><p>Ja. Ik werk graag samen met merkenbureaus, marketingteams of andere partijen die al betrokken zijn bij uw project.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CTA BAND -->
 <div class="cta-band">
   <div class="cta-band-bg">HD</div>
   <div class="sec-tag reveal" style="justify-content:center;"><div class="sec-tag-line"></div><span class="sec-tag-text">Klaar om te beginnen?</span><div class="sec-tag-line"></div></div>
   <h2 class="reveal">Vertel me over<br>uw <span class="it">project</span></h2>
-  <p class="reveal">Plan een vrijblijvend gesprek. Ik luister, stel vragen en kom met een eerlijk advies — ook als dat betekent dat u beter af bent zonder mij.</p>
+  <p class="reveal">Plan een vrijblijvend gesprek. Ik luister, stel vragen en kom met een eerlijk advies.</p>
   <div class="cta-band-actions reveal">
     <a href="contact.html" class="btn-primary">Gesprek inplannen <span class="arr">→</span></a>
     <a href="werkwijze.html" class="btn-outline">Hoe ik werk</a>
@@ -436,6 +600,25 @@ if(mBtn){
   mobileNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
   document.addEventListener('click',function(e){if(menuOpen&&!mBtn.contains(e.target)&&!mobileNav.contains(e.target))closeMenu();});
 }
+
+// SERVICE BLOCK ACCORDION (mobile only)
+function isMobile(){return window.innerWidth<=768;}
+document.querySelectorAll('.sb-block-header').forEach(function(header){
+  header.addEventListener('click',function(){
+    if(!isMobile()) return;
+    var block=header.parentElement;
+    var wasOpen=block.classList.contains('open');
+    document.querySelectorAll('.service-block').forEach(function(b){b.classList.remove('open');});
+    if(!wasOpen) block.classList.add('open');
+  });
+});
+
+// Show packages hint on mobile
+if(isMobile()){
+  var hint=document.getElementById('pkgHint');
+  if(hint) hint.style.display='flex';
+}
+
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(function(q){
   q.addEventListener('click',function(){
