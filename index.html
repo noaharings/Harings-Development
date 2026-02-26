@@ -24,15 +24,11 @@ body {
   font-family: 'Epilogue', sans-serif; font-weight: 300;
   line-height: 1.75; overflow-x: hidden; -webkit-font-smoothing: antialiased;
 }
-
-/* GRAIN */
 body::after {
   content:''; position:fixed; inset:0;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events:none; z-index:9997; opacity:.5;
 }
-
-/* NAV — FIX: overflow:visible so mobile dropdown isn't clipped */
 nav { position:fixed; top:0; left:0; right:0; z-index:500; padding:2rem 5vw; display:flex; align-items:center; justify-content:space-between; transition:background .5s,border-bottom .5s; overflow:visible; }
 nav.scrolled { background:rgba(14,14,18,0.92); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border-dark); }
 .nav-logo { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:var(--white); text-decoration:none; }
@@ -43,22 +39,8 @@ nav.scrolled { background:rgba(14,14,18,0.92); backdrop-filter:blur(16px); -webk
 .nav-cta { font-size:0.78rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold); padding-bottom:2px; transition:opacity .2s; }
 .nav-cta:hover { opacity:.65; }
 .mobile-nav-btn { display:none; flex-direction:column; gap:5px; padding:4px; background:none; border:none; cursor:pointer; -webkit-tap-highlight-color:transparent; }
-.mobile-nav-btn span { display:block; width:22px; height:1px; background:var(--white); transition:transform .3s, opacity .3s; }
-/* Mobile dropdown — FIX: position:fixed so it always appears below nav correctly */
-.mobile-nav-dropdown {
-  display:none;
-  flex-direction:column;
-  position:fixed;
-  top:72px;
-  left:0; right:0;
-  z-index:499;
-  background:rgba(14,14,18,0.97);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  padding:2rem 5vw;
-  gap:1.5rem;
-  border-bottom:1px solid rgba(255,255,255,0.08);
-}
+.mobile-nav-btn span { display:block; width:22px; height:1px; background:var(--white); }
+.mobile-nav-dropdown { display:none; flex-direction:column; position:fixed; top:72px; left:0; right:0; z-index:499; background:rgba(14,14,18,0.97); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); padding:2rem 5vw; gap:1.5rem; border-bottom:1px solid rgba(255,255,255,0.08); }
 .mobile-nav-dropdown.open { display:flex; }
 .mobile-nav-dropdown a { font-size:0.9rem; font-weight:400; color:rgba(250,249,246,0.7); text-decoration:none; letter-spacing:0.08em; text-transform:uppercase; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,0.05); }
 .mobile-nav-dropdown a:last-child { border-bottom:none; color:var(--gold); }
@@ -72,22 +54,18 @@ nav.scrolled { background:rgba(14,14,18,0.92); backdrop-filter:blur(16px); -webk
 .hero-kicker-text { font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:500; }
 h1 { font-family:'Playfair Display',serif; font-size:clamp(3rem,6.5vw,7.5rem); font-weight:900; line-height:0.95; letter-spacing:-0.025em; margin-bottom:2rem; opacity:0; animation:fadeUp .9s .25s ease forwards; }
 h1 .it { font-style:italic; color:var(--gold); }
-
 .tagline { height:2.4rem; display:flex; align-items:center; margin-bottom:2.5rem; opacity:0; animation:fadeUp .9s .38s ease forwards; }
 .typed-text { font-family:'Playfair Display',serif; font-style:italic; font-weight:700; font-size:clamp(1.1rem,1.8vw,1.5rem); color:var(--white); border-right:2px solid var(--gold); padding-right:4px; display:inline-block; min-width:2px; white-space:nowrap; animation:blink-cursor .9s step-end infinite; }
 @keyframes blink-cursor { 0%,100%{border-color:var(--gold)} 50%{border-color:transparent} }
-
 .hero-lower { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:end; opacity:0; animation:fadeUp .9s .52s ease forwards; }
 .hero-p { color:rgba(250,249,246,0.5); font-size:1.05rem; line-height:1.75; max-width:430px; }
 .hero-acts { display:flex; flex-direction:column; align-items:flex-start; gap:1.2rem; }
-
 .btn-primary { display:inline-flex; align-items:center; gap:1rem; padding:1.1rem 2.8rem; background:var(--gold); color:var(--ink); font-family:'Epilogue',sans-serif; font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; border:none; transition:background .25s,transform .25s; -webkit-tap-highlight-color:transparent; }
 .btn-primary:hover { background:var(--gold2); transform:translateX(4px); }
 .arr { transition:transform .25s; }
 .btn-primary:hover .arr { transform:translateX(4px); }
 .btn-ghost-text { font-size:0.82rem; letter-spacing:0.08em; color:rgba(250,249,246,0.38); text-decoration:none; text-transform:uppercase; font-weight:400; transition:color .2s; }
 .btn-ghost-text:hover { color:var(--white); }
-
 .hero-bottom { display:flex; align-items:center; gap:1.5rem; opacity:0; animation:fadeIn 1s 1s forwards; }
 .h-line  { width:70px; height:1px; background:var(--border-dark); }
 .h-label { font-size:0.65rem; letter-spacing:0.2em; color:rgba(250,249,246,0.2); text-transform:uppercase; }
@@ -208,7 +186,7 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
 @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
-/* RESPONSIVE */
+/* RESPONSIVE — TABLET */
 @media (max-width:1100px) {
   .journey-grid { grid-template-columns:1fr; }
   .j-phase { border-right:none; }
@@ -223,35 +201,259 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
   .foot-brand { grid-column:1/-1; }
   .intro-band { grid-template-columns:1fr; gap:1.5rem; }
 }
+
+/* ============================================================
+   MOBILE OPTIMIZATIONS — compact, scannable, touch-friendly
+   ============================================================ */
 @media (max-width:768px) {
-  nav { padding:1.25rem 5vw; }
+  nav { padding:1.1rem 5vw; }
   .nav-links,.nav-cta { display:none; }
   .mobile-nav-btn { display:flex; }
-  #hero { padding-top:13vh; padding-bottom:5vh; }
-  .hero-rule,.hero-rule2 { display:none; }
-  h1 { font-size:clamp(2.8rem,10vw,4rem); }
-  .hero-lower { grid-template-columns:1fr; gap:2rem; }
-  .hero-p { font-size:0.95rem; }
-  .promise-band { grid-template-columns:1fr; }
-  .promise-block { padding:2.5rem; }
-  #journey { padding:5rem 5vw; }
-  .j-phase { padding:2.5rem; }
-  #support { padding:5rem 5vw; }
-  .sup-card { padding:2rem; }
-  #about { padding:5rem 5vw; }
-  .photo-frame { max-width:100%; }
-  .photo-caption { position:relative; bottom:auto; right:auto; margin-top:1rem; max-width:100%; }
-  #cta { padding:6rem 5vw; }
-  .cta-btns { flex-direction:column; align-items:center; }
-  .footer-inner { grid-template-columns:1fr; }
-  .foot-bottom { flex-direction:column; gap:.6rem; text-align:center; }
-  /* Mobile: reduce grain overlay for performance */
   body::after { display:none; }
+
+  /* HERO — compact */
+  #hero {
+    min-height:auto;
+    padding: 12vh 5vw 4vh;
+    grid-template-rows: auto auto;
+  }
+  .hero-rule,.hero-rule2 { display:none; }
+  h1 { font-size: clamp(2.4rem,9vw,3.4rem); margin-bottom:1.2rem; }
+  .hero-kicker { margin-bottom:1.5rem; }
+  .tagline { height:2rem; margin-bottom:1.5rem; }
+  .typed-text { font-size:1.1rem; }
+  .hero-lower {
+    grid-template-columns:1fr;
+    gap:1.5rem;
+    margin-top: 0;
+  }
+  .hero-p { font-size:0.9rem; max-width:100%; }
+  .hero-acts { flex-direction:row; flex-wrap:wrap; gap:.75rem; align-items:center; }
+  .btn-primary { padding:.85rem 1.8rem; font-size:0.78rem; }
+  .hero-bottom { display:none; }
+
+  /* INTRO BAND — compact */
+  .intro-band { padding:2.5rem 5vw; gap:0.8rem; }
+  .intro-band-label { display:none; }
+  .intro-band-text { font-size:1.1rem; line-height:1.5; }
+
+  /* PROMISE BAND — horizontal scroll cards */
+  .promise-band {
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    border-top:1px solid var(--border-dark);
+    border-bottom:1px solid var(--border-dark);
+    gap:0;
+    scrollbar-width:none;
+  }
+  .promise-band::-webkit-scrollbar { display:none; }
+  .promise-block {
+    min-width: 80vw;
+    scroll-snap-align:start;
+    border-right:1px solid var(--border-dark);
+    border-bottom:none;
+    padding:2rem;
+    flex-shrink:0;
+  }
+  .promise-band-hint {
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+    padding:.75rem 5vw;
+    background:var(--ink2);
+    font-size:0.65rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:rgba(250,249,246,0.25);
+  }
+  .promise-band-hint::after {
+    content:'→';
+    color:var(--gold);
+    font-size:0.8rem;
+    animation: nudge 1.5s ease-in-out infinite;
+  }
+  @keyframes nudge { 0%,100%{transform:translateX(0)} 50%{transform:translateX(4px)} }
+
+  /* JOURNEY — accordion on mobile */
+  #journey { padding:3rem 5vw; }
+  .sec-hd { margin-bottom:2rem; }
+  #journey h2 { font-size:1.9rem; }
+  .sec-sub { font-size:0.85rem; margin-top:.75rem; }
+  .journey-grid {
+    display:flex;
+    flex-direction:column;
+    border:none;
+    gap:0;
+  }
+  .j-phase {
+    border:none;
+    border-bottom:1px solid var(--border-dark);
+    padding:0;
+    grid-column:auto;
+    cursor:pointer;
+  }
+  .j-phase:last-child { border-bottom:none; }
+  .j-phase-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:1.2rem 0;
+    gap:1rem;
+  }
+  .j-phase-header-left {
+    display:flex;
+    align-items:center;
+    gap:1rem;
+  }
+  .j-phase-num-sm {
+    font-family:'Playfair Display',serif;
+    font-weight:900;
+    font-size:1.2rem;
+    color:rgba(200,169,110,0.4);
+    min-width:2rem;
+    line-height:1;
+  }
+  .j-phase-title-sm {
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:1rem;
+    line-height:1.2;
+    color:var(--white);
+  }
+  .j-phase-icon {
+    width:22px; height:22px;
+    border:1px solid var(--border-dark);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    transition:transform .3s, border-color .3s;
+  }
+  .j-phase-icon::before { content:'+'; font-size:.9rem; color:var(--gold); line-height:1; }
+  .j-phase.open .j-phase-icon { transform:rotate(45deg); border-color:var(--gold); }
+  .j-phase-body {
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+    padding:0;
+  }
+  .j-phase.open .j-phase-body { max-height:500px; }
+  .j-phase-body-inner {
+    padding-bottom:1.5rem;
+  }
+  .j-num { display:none; }
+  .j-tag { margin-bottom:.6rem; font-size:0.62rem; }
+  .j-desc { font-size:0.88rem; }
+  .j-list { margin-top:1rem; }
+  .j-item { font-size:0.8rem; }
+  .j-title { display:none; } /* title shown in header */
+
+  /* SUPPORT — stacked compact */
+  #support { padding:3rem 5vw; gap:2.5rem; }
+  .sup-card { padding:1.5rem; }
+  .sup-quote { font-size:1rem; margin-bottom:1.2rem; }
+  .sup-divider { margin:1.5rem 0; }
+  .sup-pillars { flex-direction:row; gap:1rem; flex-wrap:wrap; }
+  .sup-pillar { flex:1; min-width:120px; }
+  .sup-text { font-size:0.88rem; margin-bottom:1.5rem; }
+  .tiers { gap:.5rem; margin-bottom:1.5rem; }
+  .tier { padding:1rem; gap:1rem; }
+  .tier-name { font-size:.88rem; }
+  .tier-desc { font-size:0.78rem; }
+  .tier-badge { font-size:0.6rem; padding:.2rem .6rem; }
+
+  /* ABOUT — compact */
+  #about { padding:3rem 5vw; }
+  .about-grid { gap:2rem; }
+  .photo-frame { aspect-ratio:4/3; max-width:100%; }
+  .photo-caption { position:relative; bottom:auto; right:auto; margin-top:.75rem; max-width:100%; padding:1rem 1.2rem; }
+  .about-intro { font-size:1rem; margin-bottom:1.2rem; }
+  .about-p { font-size:0.88rem; margin-bottom:1rem; }
+  /* collapse extra about paragraphs */
+  .about-p.collapsible { display:none; }
+  .about-p.collapsible.show { display:block; }
+  .about-read-more {
+    background:none; border:none;
+    color:var(--gold); font-size:0.78rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    font-family:'Epilogue',sans-serif;
+    cursor:pointer; padding:0;
+    margin-bottom:1rem;
+    display:flex; align-items:center; gap:.4rem;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .about-vals { margin-top:1.5rem; gap:.5rem; }
+  .about-val { font-size:0.85rem; }
+
+  /* CTA — compact */
+  #cta { padding:4rem 5vw; }
+  #cta h2 { font-size:2rem; margin-bottom:1rem; }
+  #cta p { font-size:0.9rem; margin-bottom:2rem; }
+  .cta-btns { flex-direction:column; align-items:stretch; gap:.75rem; }
+  .cta-btns .btn-primary, .cta-btns .btn-outline { justify-content:center; width:100%; }
+
+  /* FOOTER — compact */
+  footer { padding:2.5rem 5vw 0; }
+  .footer-inner { grid-template-columns:1fr; gap:1.5rem; padding-bottom:2rem; }
+  .foot-brand { grid-column:auto; }
+  .foot-tagline { font-size:0.82rem; max-width:100%; }
+  .foot-col h4 { margin-bottom:.75rem; }
+  .foot-col ul { gap:.5rem; }
+  .foot-bottom { flex-direction:column; gap:.6rem; text-align:center; padding:1.25rem 0; }
+
+  /* Mobile stats bar */
+  .mobile-stats {
+    display:flex;
+    border-top:1px solid var(--border-dark);
+    border-bottom:1px solid var(--border-dark);
+    background:var(--ink2);
+  }
+  .mobile-stat {
+    flex:1;
+    padding:1.2rem .5rem;
+    text-align:center;
+    border-right:1px solid var(--border-dark);
+  }
+  .mobile-stat:last-child { border-right:none; }
+  .mobile-stat-num {
+    font-family:'Playfair Display',serif;
+    font-size:1.4rem;
+    font-weight:900;
+    color:var(--gold);
+    line-height:1;
+    margin-bottom:.2rem;
+  }
+  .mobile-stat-label {
+    font-size:0.6rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:rgba(250,249,246,0.3);
+    line-height:1.3;
+  }
+}
+
+/* hide mobile-only elements on desktop */
+.mobile-only { display:none; }
+@media (max-width:768px) {
+  .mobile-only { display:flex; }
+  .promise-band-hint { display:flex; }
+}
+@media (min-width:769px) {
+  .promise-band-hint { display:none; }
+  .mobile-stats { display:none; }
+  .about-p.collapsible { display:block !important; }
+  .about-read-more { display:none !important; }
+  /* ensure desktop journey stays as-is */
+  .j-phase-header { display:none; }
+  .j-phase-body { max-height:none !important; overflow:visible; }
+  .j-phase-body-inner { padding:0; }
+  .j-title { display:block; }
+  .j-num { display:block; }
 }
 </style>
 </head>
 <body>
-<!-- NAV -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">Harings<em>.</em></a>
   <ul class="nav-links">
@@ -266,7 +468,6 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
   </button>
 </nav>
 
-<!-- FIX: Separate dropdown element, not inside nav's overflow context -->
 <div class="mobile-nav-dropdown" id="mobileNav" role="navigation" aria-label="Mobiel menu">
   <a href="werkwijze.html">Werkwijze</a>
   <a href="diensten.html">Diensten</a>
@@ -287,10 +488,10 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
     <h1>Van eerste idee tot<br><span class="it">werkend product.</span><br>En daarna.</h1>
     <p class="tagline"><span class="typed-text"></span></p>
     <div class="hero-lower">
-      <p class="hero-p">Harings Development begeleidt u door het volledige digitale traject — van strategie en design, door ontwikkeling en lancering, tot langdurige ondersteuning. Geen losse onderdelen, maar één coherent proces.</p>
+      <p class="hero-p">Harings Development begeleidt u door het volledige digitale traject — van strategie en design, door ontwikkeling en lancering, tot langdurige ondersteuning.</p>
       <div class="hero-acts">
         <a href="contact.html" class="btn-primary">Project bespreken <span class="arr">→</span></a>
-        <a href="#journey" class="btn-ghost-text">Bekijk hoe het werkt</a>
+        <a href="#journey" class="btn-ghost-text">Hoe het werkt</a>
       </div>
     </div>
   </div>
@@ -301,6 +502,22 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
   </div>
 </section>
 
+<!-- MOBILE STATS BAR -->
+<div class="mobile-stats mobile-only">
+  <div class="mobile-stat">
+    <div class="mobile-stat-num">1</div>
+    <div class="mobile-stat-label">Aanspreek&shy;punt</div>
+  </div>
+  <div class="mobile-stat">
+    <div class="mobile-stat-num">5</div>
+    <div class="mobile-stat-label">Fases van aanpak</div>
+  </div>
+  <div class="mobile-stat">
+    <div class="mobile-stat-num">NL</div>
+    <div class="mobile-stat-label">Heel Nederland</div>
+  </div>
+</div>
+
 <!-- INTRO BAND -->
 <div class="intro-band reveal">
   <span class="intro-band-label">De aanpak</span>
@@ -308,6 +525,7 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
 </div>
 
 <!-- PROMISE BAND -->
+<div class="promise-band-hint mobile-only">Veeg voor meer</div>
 <div class="promise-band">
   <div class="promise-block reveal">
     <div class="promise-label">Eén aanspreekpunt</div>
@@ -331,67 +549,124 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
   <div class="sec-hd reveal">
     <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Het complete traject</span></div>
     <h2>Van gesprek<br>tot <span class="it">live</span> product</h2>
-    <p class="sec-sub">Elk project doorloopt hetzelfde zorgvuldige proces. U weet altijd waar u staat, wat er komt en waarom we de keuzes maken die we maken.</p>
+    <p class="sec-sub">Elk project doorloopt hetzelfde zorgvuldige proces. U weet altijd waar u staat en wat er volgt.</p>
   </div>
   <div class="journey-grid reveal">
-    <div class="j-phase">
-      <div class="j-num">01</div>
-      <div class="j-tag">Fase één</div>
-      <div class="j-title">Strategie &amp; Ontdekking</div>
-      <p class="j-desc">We beginnen met luisteren. In een uitgebreid kennismakingsgesprek brengen we uw doelen, doelgroep en concurrentie scherp in kaart. Pas als we het grotere plaatje begrijpen, gaan we aan de slag.</p>
-      <div class="j-list">
-        <div class="j-item">Intake en doelstellingengesprek</div>
-        <div class="j-item">Markt- en concurrentieanalyse</div>
-        <div class="j-item">Projectplan en tijdlijn op maat</div>
-        <div class="j-item">Heldere offerte zonder verborgen kosten</div>
+    <div class="j-phase" data-phase="1">
+      <!-- mobile header -->
+      <div class="j-phase-header">
+        <div class="j-phase-header-left">
+          <span class="j-phase-num-sm">01</span>
+          <span class="j-phase-title-sm">Strategie &amp; Ontdekking</span>
+        </div>
+        <div class="j-phase-icon"></div>
+      </div>
+      <!-- body (always visible desktop, accordion mobile) -->
+      <div class="j-phase-body">
+        <div class="j-phase-body-inner">
+          <div class="j-num">01</div>
+          <div class="j-tag">Fase één</div>
+          <div class="j-title">Strategie &amp; Ontdekking</div>
+          <p class="j-desc">We beginnen met luisteren. In een uitgebreid kennismakingsgesprek brengen we uw doelen, doelgroep en concurrentie scherp in kaart.</p>
+          <div class="j-list">
+            <div class="j-item">Intake en doelstellingengesprek</div>
+            <div class="j-item">Markt- en concurrentieanalyse</div>
+            <div class="j-item">Projectplan en tijdlijn op maat</div>
+            <div class="j-item">Heldere offerte zonder verborgen kosten</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="j-phase">
-      <div class="j-num">02</div>
-      <div class="j-tag">Fase twee</div>
-      <div class="j-title">Design &amp; Concept</div>
-      <p class="j-desc">We ontwerpen eerst, coderen daarna. U krijgt interactieve mockups te zien zodat het eindresultaat duidelijk is voordat er ook maar één regel code is geschreven. Meerdere revisierondes inbegrepen.</p>
-      <div class="j-list">
-        <div class="j-item">Wireframes en gebruikersflows</div>
-        <div class="j-item">High-fidelity UI design</div>
-        <div class="j-item">Interactief prototype ter beoordeling</div>
-        <div class="j-item">Volledig responsief ontwerp</div>
+    <div class="j-phase" data-phase="2">
+      <div class="j-phase-header">
+        <div class="j-phase-header-left">
+          <span class="j-phase-num-sm">02</span>
+          <span class="j-phase-title-sm">Design &amp; Concept</span>
+        </div>
+        <div class="j-phase-icon"></div>
+      </div>
+      <div class="j-phase-body">
+        <div class="j-phase-body-inner">
+          <div class="j-num">02</div>
+          <div class="j-tag">Fase twee</div>
+          <div class="j-title">Design &amp; Concept</div>
+          <p class="j-desc">We ontwerpen eerst, coderen daarna. U krijgt interactieve mockups te zien zodat het eindresultaat duidelijk is voordat er code is geschreven.</p>
+          <div class="j-list">
+            <div class="j-item">Wireframes en gebruikersflows</div>
+            <div class="j-item">High-fidelity UI design</div>
+            <div class="j-item">Interactief prototype ter beoordeling</div>
+            <div class="j-item">Volledig responsief ontwerp</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="j-phase">
-      <div class="j-num">03</div>
-      <div class="j-tag">Fase drie</div>
-      <div class="j-title">Ontwikkeling</div>
-      <p class="j-desc">De bouw verloopt in korte, aantoonbare sprints. U heeft doorlopend inzicht in de voortgang via een privé-omgeving waar u het product al in werking kunt zien. Geen verrassingen aan het einde.</p>
-      <div class="j-list">
-        <div class="j-item">Front-end en back-end ontwikkeling</div>
-        <div class="j-item">Koppelingen met externe systemen en API's</div>
-        <div class="j-item">Grondige cross-browser en device tests</div>
-        <div class="j-item">Snelheid- en beveiligingsoptimalisatie</div>
+    <div class="j-phase" data-phase="3">
+      <div class="j-phase-header">
+        <div class="j-phase-header-left">
+          <span class="j-phase-num-sm">03</span>
+          <span class="j-phase-title-sm">Ontwikkeling</span>
+        </div>
+        <div class="j-phase-icon"></div>
+      </div>
+      <div class="j-phase-body">
+        <div class="j-phase-body-inner">
+          <div class="j-num">03</div>
+          <div class="j-tag">Fase drie</div>
+          <div class="j-title">Ontwikkeling</div>
+          <p class="j-desc">De bouw verloopt in korte, aantoonbare sprints. U heeft doorlopend inzicht via een privé-omgeving waar u het product al in werking kunt zien.</p>
+          <div class="j-list">
+            <div class="j-item">Front-end en back-end ontwikkeling</div>
+            <div class="j-item">Koppelingen met externe systemen</div>
+            <div class="j-item">Grondige cross-browser tests</div>
+            <div class="j-item">Snelheid- en beveiligingsoptimalisatie</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="j-phase">
-      <div class="j-num">04</div>
-      <div class="j-tag">Fase vier</div>
-      <div class="j-title">Lancering</div>
-      <p class="j-desc">De livegang is een gecontroleerd moment, geen sprong in het diepe. We zorgen voor een vlekkeloze overdracht, volledige documentatie en een rustige opstart zodat alles van dag één perfect functioneert.</p>
-      <div class="j-list">
-        <div class="j-item">Technische livegang-begeleiding</div>
-        <div class="j-item">Zoekmachineoptimalisatie op orde</div>
-        <div class="j-item">Overdracht van toegangen en documentatie</div>
-        <div class="j-item">Intensieve monitoring de eerste weken</div>
+    <div class="j-phase" data-phase="4">
+      <div class="j-phase-header">
+        <div class="j-phase-header-left">
+          <span class="j-phase-num-sm">04</span>
+          <span class="j-phase-title-sm">Lancering</span>
+        </div>
+        <div class="j-phase-icon"></div>
+      </div>
+      <div class="j-phase-body">
+        <div class="j-phase-body-inner">
+          <div class="j-num">04</div>
+          <div class="j-tag">Fase vier</div>
+          <div class="j-title">Lancering</div>
+          <p class="j-desc">De livegang is een gecontroleerd moment. We zorgen voor een vlekkeloze overdracht en intensieve monitoring zodat alles van dag één perfect functioneert.</p>
+          <div class="j-list">
+            <div class="j-item">Technische livegang-begeleiding</div>
+            <div class="j-item">SEO op orde</div>
+            <div class="j-item">Overdracht van toegangen</div>
+            <div class="j-item">Intensieve monitoring de eerste weken</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="j-phase">
-      <div class="j-num">05</div>
-      <div class="j-tag">Fase vijf — doorlopend</div>
-      <div class="j-title">Ondersteuning &amp; Groei</div>
-      <p class="j-desc">De lancering is niet het einde, het is het begin. We blijven betrokken, meten wat werkt, lossen problemen op voordat u ze merkt en bouwen door op wat reeds staat. Uw digitale product wordt maand na maand beter.</p>
-      <div class="j-list j-last-list">
-        <div class="j-item">Proactief onderhoud en updates</div>
-        <div class="j-item">Maandelijkse prestatierapporten</div>
-        <div class="j-item">Nieuwe functies en iteraties</div>
-        <div class="j-item">Directe lijn voor vragen en fixes</div>
+    <div class="j-phase" data-phase="5">
+      <div class="j-phase-header">
+        <div class="j-phase-header-left">
+          <span class="j-phase-num-sm">05</span>
+          <span class="j-phase-title-sm">Ondersteuning &amp; Groei</span>
+        </div>
+        <div class="j-phase-icon"></div>
+      </div>
+      <div class="j-phase-body">
+        <div class="j-phase-body-inner">
+          <div class="j-num">05</div>
+          <div class="j-tag">Fase vijf — doorlopend</div>
+          <div class="j-title">Ondersteuning &amp; Groei</div>
+          <p class="j-desc">De lancering is het begin. We blijven betrokken, meten wat werkt en bouwen door op wat reeds staat. Uw product wordt maand na maand beter.</p>
+          <div class="j-list j-last-list">
+            <div class="j-item">Proactief onderhoud en updates</div>
+            <div class="j-item">Maandelijkse prestatierapporten</div>
+            <div class="j-item">Nieuwe functies en iteraties</div>
+            <div class="j-item">Directe lijn voor vragen</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -424,26 +699,26 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
   <div class="reveal d1">
     <div class="sec-tag"><div class="sec-tag-line"></div><span class="sec-tag-text">Na de lancering</span></div>
     <h2>Altijd iemand<br>die <span class="it">meekijkt</span></h2>
-    <p class="sup-text">Na de lancering stopt het contact niet. Ik volg uw platform actief, los kleine dingen op voordat ze groot worden en rapporteer maandelijks over prestaties, gebruikersgedrag en mogelijkheden om verder te groeien.</p>
+    <p class="sup-text">Na de lancering stopt het contact niet. Ik volg uw platform actief, los kleine dingen op voordat ze groot worden en rapporteer maandelijks.</p>
     <div class="tiers">
       <div class="tier">
         <div class="tier-info">
           <div class="tier-name">Basis Ondersteuning</div>
-          <div class="tier-desc">Beveiligingsupdates, hosting en een maandelijkse technische check. Ideaal voor kleinere websites die stabiel moeten blijven draaien.</div>
+          <div class="tier-desc">Beveiligingsupdates, hosting en een maandelijkse technische check.</div>
         </div>
         <div class="tier-badge">Stabiel</div>
       </div>
       <div class="tier">
         <div class="tier-info">
           <div class="tier-name">Groei Ondersteuning</div>
-          <div class="tier-desc">Alles van Basis, aangevuld met performance-optimalisaties, analyserapportages en uitbreiding van functionaliteit op aanvraag.</div>
+          <div class="tier-desc">Alles van Basis, aangevuld met performance-optimalisaties en analyserapportages.</div>
         </div>
         <div class="tier-badge">Populair</div>
       </div>
       <div class="tier">
         <div class="tier-info">
           <div class="tier-name">Prioriteit Ondersteuning</div>
-          <div class="tier-desc">Directe lijn, gegarandeerde respons binnen vier uur, continue monitoring en een vast aantal ontwikkeluren per maand inbegrepen.</div>
+          <div class="tier-desc">Directe lijn, reactie binnen vier uur, vaste ontwikkeluren per maand.</div>
         </div>
         <div class="tier-badge">Volledig</div>
       </div>
@@ -470,9 +745,10 @@ footer { background:var(--ink2); padding:5rem 5vw 0; border-top:1px solid var(--
       <h2>Techniek die<br>u <span class="it">begrijpt</span></h2>
       <p class="about-intro">Ik ben Noa Harings, oprichter van Harings Development en de persoon die uw project van begin tot eind begeleidt.</p>
       <p class="about-p">Al geruime tijd ben ik actief in web- en app development en heb ik ervaring met het ontwikkelen, lanceren en onderhouden van digitale producten — van veilige websites tot complete applicaties.</p>
-      <p class="about-p">In de afgelopen jaren heb ik gewerkt aan uiteenlopende projecten, waaronder apps die succesvol zijn uitgebracht en platforms waarbij veiligheid en stabiliteit centraal stonden. Ook heb ik als developer gewerkt met machine learning, waar ik technische diepgang en analytisch denken verder heb ontwikkeld.</p>
-      <p class="about-p">Toch haal ik de meeste voldoening niet uit complexe algoritmes, maar uit mensen helpen hun digitale ideeën werkelijkheid te maken. Ik geloof dat techniek pas écht waardevol is wanneer het begrijpelijk is, betrouwbaar werkt en bijdraagt aan de groei van iemand zijn bedrijf of visie.</p>
-      <p class="about-p">Daarom kies ik bewust voor een persoonlijke aanpak. Geen afstand, geen onnodige lagen — maar direct contact, duidelijke communicatie en een samenwerking die verder gaat dan alleen het opleveren van een product.</p>
+      <p class="about-p collapsible">In de afgelopen jaren heb ik gewerkt aan uiteenlopende projecten, waaronder apps die succesvol zijn uitgebracht en platforms waarbij veiligheid en stabiliteit centraal stonden.</p>
+      <p class="about-p collapsible">Toch haal ik de meeste voldoening niet uit complexe algoritmes, maar uit mensen helpen hun digitale ideeën werkelijkheid te maken. Ik geloof dat techniek pas écht waardevol is wanneer het begrijpelijk is, betrouwbaar werkt en bijdraagt aan de groei van iemand zijn bedrijf.</p>
+      <p class="about-p collapsible">Daarom kies ik bewust voor een persoonlijke aanpak. Geen afstand, geen onnodige lagen — maar direct contact, duidelijke communicatie en een samenwerking die verder gaat dan alleen het opleveren van een product.</p>
+      <button class="about-read-more" id="aboutReadMore">Lees meer <span>↓</span></button>
       <div class="about-vals">
         <div class="about-val"><span class="about-val-b">—</span> Één aanspreekpunt, van begin tot eind</div>
         <div class="about-val"><span class="about-val-b">—</span> Eerlijk over wat werkt en wat niet</div>
@@ -545,37 +821,16 @@ var obs = new IntersectionObserver(function (entries) {
 }, { threshold: 0.07 });
 document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
 
-// MOBILE NAV — FIX: use separate dropdown element with position:fixed
+// MOBILE NAV
 var mBtn = document.getElementById('mBtn');
 var mobileNav = document.getElementById('mobileNav');
 var menuOpen = false;
-
-function closeMenu() {
-  menuOpen = false;
-  mobileNav.classList.remove('open');
-  mBtn.setAttribute('aria-expanded', 'false');
-}
-
-function openMenu() {
-  menuOpen = true;
-  mobileNav.classList.add('open');
-  mBtn.setAttribute('aria-expanded', 'true');
-}
-
+function closeMenu() { menuOpen = false; mobileNav.classList.remove('open'); mBtn.setAttribute('aria-expanded', 'false'); }
+function openMenu() { menuOpen = true; mobileNav.classList.add('open'); mBtn.setAttribute('aria-expanded', 'true'); }
 if (mBtn) {
-  mBtn.addEventListener('click', function () {
-    menuOpen ? closeMenu() : openMenu();
-  });
-  // Close on any link click
-  mobileNav.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', closeMenu);
-  });
-  // Close on outside click
-  document.addEventListener('click', function (e) {
-    if (menuOpen && !mBtn.contains(e.target) && !mobileNav.contains(e.target)) {
-      closeMenu();
-    }
-  });
+  mBtn.addEventListener('click', function () { menuOpen ? closeMenu() : openMenu(); });
+  mobileNav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+  document.addEventListener('click', function (e) { if (menuOpen && !mBtn.contains(e.target) && !mobileNav.contains(e.target)) closeMenu(); });
 }
 
 // TYPING ANIMATION
@@ -583,18 +838,49 @@ if (mBtn) {
   var el = document.querySelector('.typed-text');
   if (!el) return;
   var phrases = ['volledig design','web development','app ontwikkeling','op maat gemaakt','snelle support'];
-  var pi = 0, ci = 0, deleting = false;
-  function tick() {
-    var cur = phrases[pi];
-    ci += deleting ? -1 : 1;
-    el.textContent = cur.substring(0, ci);
-    var wait = deleting ? 45 : 95;
-    if (!deleting && ci === cur.length)  { wait = 1800; deleting = true; }
-    else if (deleting && ci === 0)       { deleting = false; pi = (pi + 1) % phrases.length; wait = 400; }
-    setTimeout(tick, wait);
+  var phraseIndex = 0, charIndex = 0, isDeleting = false, typingSpeed = 100;
+  function type() {
+    var currentPhrase = phrases[phraseIndex];
+    if (isDeleting) {
+      el.textContent = currentPhrase.substring(0, charIndex - 1);
+      charIndex--;
+      typingSpeed = 50;
+    } else {
+      el.textContent = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
+      typingSpeed = 100;
+    }
+    if (!isDeleting && charIndex === currentPhrase.length) { typingSpeed = 2000; isDeleting = true; }
+    else if (isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; typingSpeed = 500; }
+    setTimeout(type, typingSpeed);
   }
-  setTimeout(tick, 1200);
+  setTimeout(type, 1000);
 })();
+
+// JOURNEY ACCORDION (mobile only)
+function isMobile() { return window.innerWidth <= 768; }
+document.querySelectorAll('.j-phase-header').forEach(function(header) {
+  header.addEventListener('click', function() {
+    if (!isMobile()) return;
+    var phase = header.parentElement;
+    var wasOpen = phase.classList.contains('open');
+    document.querySelectorAll('.j-phase').forEach(function(p) { p.classList.remove('open'); });
+    if (!wasOpen) phase.classList.add('open');
+  });
+});
+
+// ABOUT READ MORE (mobile only)
+var aboutReadMore = document.getElementById('aboutReadMore');
+if (aboutReadMore) {
+  var readMoreOpen = false;
+  aboutReadMore.addEventListener('click', function() {
+    readMoreOpen = !readMoreOpen;
+    document.querySelectorAll('.about-p.collapsible').forEach(function(p) {
+      p.classList.toggle('show', readMoreOpen);
+    });
+    aboutReadMore.innerHTML = readMoreOpen ? 'Minder tonen ↑' : 'Lees meer ↓';
+  });
+}
 </script>
 </body>
 </html>
